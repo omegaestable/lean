@@ -1,66 +1,47 @@
 # Lean Lab
 
-**A hands-on learning repository for Lean 4 and mathematical proof formalization.**
+**A structured path from zero Lean knowledge to AI-assisted theorem proving.**
 
-Built for mathematicians and programmers who have zero Lean experience but want to learn theorem proving. Work through the files in order, fill in the `sorry`s, and build intuition one proof at a time.
+This repository is a hands-on learning environment for Lean 4, designed for mathematicians and programmers who want to master interactive theorem proving and engage with the cutting edge of AI-integrated formal mathematics. The roadmap is aligned with the research themes of the [Harmonic Aristotle program](https://harmonic.fun/news) and the broader goal of Mathematical Superintelligence (MSI).
 
 ---
 
-## What is Lean?
+## What is This?
 
-[Lean 4](https://lean-lang.org/) is both a **programming language** and a **proof assistant**. It lets you:
+Lean 4 is both a **programming language** and a **proof assistant**. It lets you write executable programs AND machine-checked mathematical proofs. The key insight: **propositions are types, proofs are programs** ([Curry-Howard correspondence](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence)).
 
-- Write programs that the compiler can execute
-- State mathematical theorems and construct machine-checked proofs
-- Formalize entire branches of mathematics (via [Mathlib](https://leanprover-community.github.io/mathlib4_docs/))
-
-The key insight: **propositions are types, proofs are programs** (the [Curry-Howard correspondence](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence)). When you prove `P → Q`, you're literally writing a function that takes a proof of `P` and returns a proof of `Q`.
+This repo takes you from "what is Lean?" to "building AI-assisted theorem provers" through 5 structured phases, each with annotated source files, exercises, and references.
 
 ---
 
 ## Getting Started
 
-### 1. Install Lean 4
+### Prerequisites
+- A code editor (VS Code recommended)
+- Basic programming experience
+- Mathematical maturity (undergrad+ level)
 
-Follow the official instructions: **[https://lean-lang.org/lean4/doc/setup.html](https://lean-lang.org/lean4/doc/setup.html)**
+### Installation
 
-On most systems:
-```bash
-# Install elan (the Lean version manager)
-curl https://elan.lean-lang.org/install.sh -sSf | sh
-```
+1. **Install Lean 4** via [elan](https://lean-lang.org/lean4/doc/setup.html):
+   ```bash
+   # Linux / macOS
+   curl https://elan.lean-lang.org/install.sh -sSf | sh
 
-On Windows, download the installer from the link above.
+   # Windows: download installer from https://lean-lang.org/lean4/doc/setup.html
+   ```
 
-### 2. Install VS Code + Lean Extension
+2. **Install VS Code + lean4 extension** (search "lean4" in VS Code extensions)
 
-- Install [VS Code](https://code.visualstudio.com/)
-- Install the **lean4** extension (search "lean4" in extensions)
-- The extension provides: syntax highlighting, type info on hover, goal view, error checking
+3. **Build this project**:
+   ```bash
+   git clone <this-repo-url>
+   cd lean
+   lake update    # downloads Mathlib (~3 GB first time, be patient)
+   lake build     # builds the project
+   ```
 
-### 3. Build this project
-
-```bash
-git clone <this-repo-url>
-cd lean
-lake update    # download Mathlib (this takes a while the first time!)
-lake build     # build the project
-```
-
-> **Note:** The first `lake update` downloads Mathlib, which is large (~3 GB of compiled artifacts). This is normal. Subsequent builds are fast.
-
-### 4. Open in VS Code
-
-```bash
-code .
-```
-
-Open any `.lean` file. The **Lean Infoview** panel (right side) shows you:
-- The current proof state (goals + hypotheses)
-- Type information on hover
-- Errors and warnings
-
-**This panel is your most important tool.** Put your cursor on different lines to see how the proof state changes.
+4. **Open in VS Code** and open any `.lean` file. The **Lean Infoview** panel (right side) shows proof states, types, and errors. **This panel is your most important tool.**
 
 ---
 
@@ -68,158 +49,233 @@ Open any `.lean` file. The **Lean Infoview** panel (right side) shows you:
 
 ```
 LeanLab/
-├── Basics/                   ← Start here!
-│   ├── HelloWorld.lean          01 — #check, #eval, first theorems
-│   ├── TypesAndTerms.lean       02 — Types, inductive types, Prop vs Type
-│   └── Functions.lean           03 — Functions, recursion, higher-order
 │
-├── Logic/                    ← Core proof skills
-│   ├── PropositionalLogic.lean  04 — ∧, ∨, →, ¬, ↔ and their proofs
-│   ├── Quantifiers.lean         05 — ∀, ∃, equality, classical logic
-│   └── Tactics.lean             06 — Full tactic reference and practice
+├── Basics/                          ← PHASE 1: Lean Fundamentals
+│   ├── HelloWorld.lean                 01 — #check, #eval, your first theorem
+│   ├── TypesAndTerms.lean              02 — Types, Prop vs Type, inductive types
+│   └── Functions.lean                  03 — Recursion, pattern matching, higher-order
 │
-├── Mathematics/              ← Real math in Lean
-│   ├── NaturalNumbers.lean      07 — Induction, divisibility, modular arithmetic
-│   ├── Algebra.lean             08 — Groups, rings, fields with Mathlib
-│   └── Analysis.lean            09 — Sequences, metric spaces, ε-δ proofs
+├── Logic/                           ← PHASE 1: Proof Skills
+│   ├── PropositionalLogic.lean         04 — ∧, ∨, →, ¬, ↔ (Curry-Howard in action)
+│   ├── Quantifiers.lean                05 — ∀, ∃, equality, classical logic
+│   └── Tactics.lean                    06 — Full tactic reference + practice
 │
-├── Exercises/                ← Test yourself
-│   ├── Level1_Basics.lean       ⭐ Functions and simple proofs
-│   ├── Level2_Logic.lean        ⭐⭐ Propositional and predicate logic
-│   └── Level3_Math.lean         ⭐⭐⭐ Number theory, algebra, analysis
+├── Mathlib/                         ← PHASE 2: Library Mastery
+│   ├── SearchAndDiscovery.lean         07 — exact?, apply?, naming conventions, Loogle
+│   └── WorkingWithMathlib.lean         08 — Typeclasses, proof engineering, contributing
 │
-└── Sandbox.lean              ← Your playground — experiment freely!
+├── Metaprogramming/                 ← PHASE 3: Extending Lean
+│   ├── CustomTactics.lean              09 — TacticM monad, custom tactics, Expr type
+│   └── MacrosAndDSLs.lean             10 — Macros, syntax extensions, elaboration
+│
+├── Mathematics/                     ← PHASE 4: Real Formalization
+│   ├── NaturalNumbers.lean             11 — Induction, divisibility, modular arithmetic
+│   ├── Algebra.lean                    12 — Groups, rings, fields via Mathlib
+│   └── Analysis.lean                   13 — Sequences, metric spaces, ε-δ proofs
+│
+├── AIIntegration/                   ← PHASE 5: AI + Lean
+│   ├── Overview.lean                   14 — Landscape, proof states, training data
+│   ├── Autoformalization.lean          15 — Informal→formal, pitfalls, pipelines
+│   └── ToolsSetup.lean                16 — LeanDojo, Pantograph, LeanCopilot setup
+│
+├── Exercises/                       ← Progressive Difficulty
+│   ├── Level1_Basics.lean              ⭐ Functions and simple proofs
+│   ├── Level2_Logic.lean               ⭐⭐ Propositional and predicate logic
+│   ├── Level3_Math.lean                ⭐⭐⭐ Algebra, inequalities, induction
+│   ├── Level4_Competition.lean         ⭐⭐⭐⭐ AMC/AIME/IMO-style problems
+│   └── Level5_Research.lean            ⭐⭐⭐⭐⭐ Research-level formalization
+│
+└── Sandbox.lean                     ← Your playground
 ```
 
 ---
 
 ## Learning Roadmap
 
-### Phase 1: Foundations (Week 1-2)
-- [ ] Work through `Basics/HelloWorld.lean` — get comfortable with `#check` and `#eval`
-- [ ] Work through `Basics/TypesAndTerms.lean` — understand the type system
-- [ ] Work through `Basics/Functions.lean` — write recursive functions
-- [ ] Complete `Exercises/Level1_Basics.lean`
-- [ ] Play in `Sandbox.lean` — break things, experiment
+### Phase 1 — Foundations (4-6 weeks)
+**Goal**: Fluency in Lean 4 syntax, types, and interactive proof.
 
-### Phase 2: Proving Things (Week 2-4)
-- [ ] Work through `Logic/PropositionalLogic.lean` — learn intro/exact/apply/constructor/cases
-- [ ] Work through `Logic/Quantifiers.lean` — master ∀, ∃, rewrite, calc
-- [ ] Work through `Logic/Tactics.lean` — build your tactic toolbox
-- [ ] Complete `Exercises/Level2_Logic.lean`
-- [ ] Start reading the [Theorem Proving in Lean 4](https://lean-lang.org/theorem_proving_in_lean4/) book
+| Task | File | Skills |
+|------|------|--------|
+| Learn `#check`, `#eval`, write first theorems | `Basics/HelloWorld.lean` | Basic syntax, `rfl` |
+| Understand types, inductive types, Prop vs Type | `Basics/TypesAndTerms.lean` | Type theory |
+| Write recursive functions, use higher-order functions | `Basics/Functions.lean` | Functional programming |
+| Prove with ∧, ∨, →, ¬, ↔ | `Logic/PropositionalLogic.lean` | Core tactics |
+| Work with ∀, ∃, equality, `calc` | `Logic/Quantifiers.lean` | Quantifier reasoning |
+| Build your tactic toolbox | `Logic/Tactics.lean` | `simp`, `omega`, `ring`, `aesop` |
+| Complete Level 1 + Level 2 exercises | `Exercises/` | Consolidation |
 
-### Phase 3: Real Mathematics (Week 4-8)
-- [ ] Work through `Mathematics/NaturalNumbers.lean` — induction and number theory
-- [ ] Work through `Mathematics/Algebra.lean` — abstract algebra with Mathlib
-- [ ] Work through `Mathematics/Analysis.lean` — epsilon-delta proofs
-- [ ] Complete `Exercises/Level3_Math.lean`
-- [ ] Try formalizing a theorem from your own research area
+**Parallel activity**: Complete the [Natural Number Game](https://adam.math.hhu.de/#/g/leanprover-community/NNG4) and start [Theorem Proving in Lean 4](https://leanprover.github.io/theorem_proving_in_lean4/).
 
-### Phase 4: Independence (Ongoing)
-- [ ] Contribute to [Mathlib](https://leanprover-community.github.io/contribute/)
-- [ ] Formalize results from your papers
-- [ ] Join the [Lean Zulip chat](https://leanprover.zulipchat.com/) community
-- [ ] Tackle problems from the [Formal Abstracts](https://formalabstracts.github.io/) project
+### Phase 2 — Mathlib & Proof Engineering (6-8 weeks)
+**Goal**: Navigate and contribute to Mathlib, the world's largest formalized math library.
 
----
+| Task | File | Skills |
+|------|------|--------|
+| Master `exact?`, `apply?`, `rw?`, naming conventions | `Mathlib/SearchAndDiscovery.lean` | Lemma discovery |
+| Work with typeclasses, proof patterns, contribution workflow | `Mathlib/WorkingWithMathlib.lean` | Proof engineering |
+| Formalize results from a textbook in your area | Your own files | Real formalization |
+| Complete Level 3 exercises | `Exercises/Level3_Math.lean` | Applied math in Lean |
 
-## Essential Commands
+**Parallel activity**: Work through [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/). Explore Tao's [Lean companion to Analysis I](https://github.com/teorth/analysis). Join the [Lean Zulip](https://leanprover.zulipchat.com/).
 
-| Command | What it does |
-|---------|-------------|
-| `#check expr` | Show the type of an expression |
-| `#eval expr` | Evaluate/compute an expression |
-| `#print name` | Show the definition of a name |
-| `exact?` | Search for a lemma that closes the goal |
-| `apply?` | Search for a lemma to apply |
-| `rw?` | Search for a rewrite rule |
-| `simp?` | Show which simp lemmas were used |
+### Phase 3 — Tactics, Automation & Metaprogramming (6-8 weeks)
+**Goal**: Extend Lean with custom tactics, macros, and automation.
 
----
+| Task | File | Skills |
+|------|------|--------|
+| Write custom tactics using TacticM | `Metaprogramming/CustomTactics.lean` | Metaprogramming |
+| Build macros and syntax extensions | `Metaprogramming/MacrosAndDSLs.lean` | DSL design |
+| Understand Expr and the elaboration pipeline | Both files | Internal APIs |
 
-## Key Tactics Quick Reference
+**Parallel activity**: Read the [Lean 4 Metaprogramming Book](https://leanprover-community.github.io/lean4-metaprogramming-book/). Explore [LeanDojo](https://github.com/lean-dojo/LeanDojo-v2) and [PyPantograph](https://github.com/stanford-centaur/PyPantograph) source code.
 
-| Tactic | Use when... |
-|--------|------------|
-| `intro` | Goal is `P → Q` or `∀ x, ...` — introduce the hypothesis |
-| `exact h` | `h` is exactly what you need to prove |
-| `apply h` | `h` proves something that implies your goal |
-| `constructor` | Goal is `P ∧ Q` or `P ↔ Q` — split into parts |
-| `cases h` | `h : P ∨ Q` — case split |
-| `obtain ⟨a, b⟩ := h` | `h : P ∧ Q` or `h : ∃ x, ...` — destructure |
-| `rw [h]` | `h : a = b` — replace `a` with `b` |
-| `simp` | Simplify using the simp lemma database |
-| `omega` | Linear arithmetic over ℕ and ℤ |
-| `ring` | Polynomial ring identities |
-| `linarith` | Linear arithmetic with hypotheses |
-| `norm_num` | Numerical computation |
-| `decide` | Decidable propositions |
-| `aesop` | Automated proof search |
-| `tauto` | Propositional tautologies |
-| `positivity` | Prove something is ≥ 0 or > 0 |
-| `induction n` | Proof by induction |
+### Phase 4 — AI-Assisted Theorem Proving (8-12 weeks)
+**Goal**: Hands-on experience with AI/Lean tools, autoformalization, and benchmarks.
 
-See [CHEATSHEET.md](CHEATSHEET.md) for the full reference.
+| Task | File | Skills |
+|------|------|--------|
+| Understand the AI/Lean landscape and proof states | `AIIntegration/Overview.lean` | Orientation |
+| Practice autoformalization, learn pitfalls | `AIIntegration/Autoformalization.lean` | Translation skills |
+| Set up LeanDojo, Pantograph, LeanCopilot | `AIIntegration/ToolsSetup.lean` | Tool proficiency |
+| Complete Level 4 competition exercises | `Exercises/Level4_Competition.lean` | Benchmark skills |
+| Fine-tune a model on Lean proof data (Python) | External | ML engineering |
+| Evaluate on miniF2F or FormL4 | External | Research methodology |
+
+**Parallel activity**: Study [Aristotle](https://arxiv.org/abs/2510.01346), [DeepSeek-Prover](https://arxiv.org/abs/2405.14333), and [FORMAL](https://arxiv.org/abs/2505.00629) papers.
+
+### Phase 5 — Research & Portfolio (Ongoing)
+**Goal**: Original contributions, collaborations, and Aristotle grant preparation.
+
+| Task | File | Skills |
+|------|------|--------|
+| Formalize results from your own research | `Exercises/Level5_Research.lean` | Original work |
+| Contribute to miniF2F / benchmark correction | External | Community impact |
+| Build an autoformalization or proof search tool | External | Research engineering |
+| Write a technical report or paper | External | Communication |
+| Prepare Aristotle grant application | External | Grant writing |
 
 ---
 
-## Resources
+## Key AI/Lean Systems (2025)
 
-### Official Documentation
-- [Lean 4 Homepage](https://lean-lang.org/)
-- [Theorem Proving in Lean 4](https://lean-lang.org/theorem_proving_in_lean4/) — **the** book to read
-- [Functional Programming in Lean](https://lean-lang.org/functional_programming_in_lean/) — for the programming side
-- [Lean 4 Manual](https://lean-lang.org/lean4/doc/) — reference manual
-- [Mathlib Documentation](https://leanprover-community.github.io/mathlib4_docs/) — searchable API docs
+| System | Organization | Key Achievement | Lean Version |
+|--------|-------------|-----------------|-------------|
+| **Aristotle** | Harmonic | IMO gold-medal equivalent | Lean 4 |
+| **AlphaProof** | DeepMind | IMO silver-medal equivalent | Lean 4 |
+| **DeepSeek-Prover-V2** | DeepSeek | Strong miniF2F performance | Lean 4 |
+| **LeanCopilot** | Caltech/LeanDojo | VS Code AI integration | Lean 4 |
+| **ReProver** | LeanDojo | Tactic prediction baseline | Lean 4 |
 
-### Interactive Learning
-- [Natural Number Game](https://adam.math.hhu.de/#/g/leanprover-community/NNG4) — brilliant beginner game, prove things about ℕ
-- [Lean Game Server](https://adam.math.hhu.de/) — more games (Set Theory, Logic, etc.)
-- [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) — tutorial with exercises
+---
 
-### Community
-- [Lean Zulip Chat](https://leanprover.zulipchat.com/) — the main community hub, very welcoming
-- [Mathlib Contributing Guide](https://leanprover-community.github.io/contribute/) — how to contribute
-- [Lean 4 GitHub](https://github.com/leanprover/lean4) — source code and issues
+## Key Benchmarks
 
-### Videos and Talks
-- [Lean 4 Metaprogramming Book](https://leanprover-community.github.io/lean4-metaprogramming-book/) — advanced
-- Search YouTube for "Lean 4 tutorial" — several good lecture series exist
-- Kevin Buzzard's talks and [Xena Project](https://xenaproject.wordpress.com/) blog
+| Benchmark | Source | Size | Focus |
+|-----------|--------|------|-------|
+| **miniF2F** | OpenAI | 488 problems | AMC/AIME/IMO competition math |
+| **ProofNet** | Research | Varies | Undergraduate mathematics |
+| **FormL4** | Research | Varies | Autoformalization quality |
+| **FormalMATH** | Research | Varies | Broad formal mathematics |
+| **PutnamBench** | Research | Varies | Advanced competition math |
 
-### For Mathematicians Specifically
-- [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) — **start here** after this repo
-- [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) — proof-writing course using Lean
-- [Formalising Mathematics](https://www.ma.imperial.ac.uk/~buzzard/xena/formalising-mathematics-2024/) — Kevin Buzzard's course (Imperial College London)
+---
+
+## Aristotle Grant — Research Directions
+
+The [Harmonic Aristotle program](https://harmonic.fun/news) offers **Principal Investigator Awards** (~$100K) and **Rising Mathematician Awards** for work advancing Mathematical Superintelligence. Key themes:
+
+1. **Autoformalization & Retrieval**: RAG/RAT systems for Lean 4, agentic feedback loops, benchmark curation
+2. **Proof Search & RL**: MCTS/MCGS strategies, value models, test-time training
+3. **Datasets & Benchmarks**: Correcting misformalizations, creating new benchmarks, evaluation metrics
+4. **Model Fine-tuning**: LoRA on Lean proof data, premise selection, local deployment
+5. **Human-AI Collaboration**: Mixed-initiative interfaces, interpretable suggestions
+
+---
+
+## Essential Tools
+
+### In Lean (inside proofs)
+| Command | Purpose |
+|---------|---------|
+| `#check expr` | Show type of expression |
+| `#eval expr` | Compute expression |
+| `#print name` | Show definition |
+| `exact?` | Find lemma closing goal |
+| `apply?` | Find applicable lemma |
+| `rw?` | Find rewrite rule |
+| `simp?` | Show simp lemmas used |
+
+### External Search
+| Tool | URL | Type |
+|------|-----|------|
+| **Loogle** | [loogle.lean-lang.org](https://loogle.lean-lang.org/) | Type-based search |
+| **Moogle** | [moogle.ai](https://www.moogle.ai/) | Natural language search |
+| **Mathlib Docs** | [leanprover-community.github.io/mathlib4_docs](https://leanprover-community.github.io/mathlib4_docs/) | API documentation |
+
+### AI/Lean Tools (Python)
+| Tool | Install | Purpose |
+|------|---------|---------|
+| **LeanDojo-v2** | `pip install lean-dojo` | Data extraction + interaction |
+| **PyPantograph** | `pip install pantograph` | Machine-to-machine REPL |
+| **LeanCopilot** | Lake dependency | VS Code AI suggestions |
+
+See [REFERENCES.md](REFERENCES.md) for the complete link collection.
+
+---
+
+## Quick Reference: Top Tactics
+
+| Tactic | Solves | Example |
+|--------|--------|---------|
+| `rfl` | `a = a` | `2 + 2 = 4` |
+| `omega` | Linear arithmetic (ℕ, ℤ) | `n + 1 > n` |
+| `ring` | Polynomial identities | `(a+b)² = a²+2ab+b²` |
+| `simp` | Simplification | `xs ++ [] = xs` |
+| `norm_num` | Numerical computation | `2^10 = 1024` |
+| `linarith` | Linear arithmetic + hypotheses | `a ≤ b → b ≤ c → a ≤ c` |
+| `positivity` | Non-negativity | `a² ≥ 0` |
+| `nlinarith` | Nonlinear arithmetic | `(a-b)² ≥ 0` |
+| `aesop` | Automated search | Various |
+| `tauto` | Propositional tautologies | `P → Q → P` |
+| `decide` | Decidable propositions | `¬(3 = 4)` |
+| `exact?` | Find a closing lemma | Any goal |
+
+Full reference: [CHEATSHEET.md](CHEATSHEET.md)
 
 ---
 
 ## FAQ
 
 **Q: Why Lean 4 and not Coq/Isabelle/Agda?**
-Lean 4 has the most active mathematical library (Mathlib), a modern programming language, excellent tooling, and a welcoming community. It's also what the [Xena Project](https://xenaproject.wordpress.com/) and many recent formalization efforts use.
+Lean 4 has the most active mathematical library (Mathlib, 200K+ theorems), the strongest AI tooling ecosystem (LeanDojo, Pantograph, LeanCopilot), and a welcoming community. It's the platform of choice for Aristotle, AlphaProof, and most recent AI/Lean research.
 
-**Q: What's Mathlib?**
-[Mathlib](https://github.com/leanprover-community/mathlib4) is a massive community-maintained library of formalized mathematics in Lean 4. It covers algebra, analysis, topology, number theory, combinatorics, and much more. This repo depends on it.
+**Q: What's `sorry`?**
+A placeholder meaning "trust me." Every `sorry` in this repo is an exercise. Your job is to replace them with real proofs. A file with zero `sorry`s is fully proven.
 
-**Q: Why is `sorry` everywhere?**
-`sorry` is a placeholder that tells Lean "trust me, this is true." It's used here to mark exercises for you to complete. Your job is to replace every `sorry` with an actual proof. A file with no `sorry`s means everything is fully proven!
+**Q: How do I find lemmas?**
+Use `exact?` / `apply?` / `rw?` inside proofs. Use [Loogle](https://loogle.lean-lang.org/) for type-based search. Use [Moogle](https://www.moogle.ai/) for natural language search.
 
-**Q: What does the yellow underline mean?**
-A yellow underline in VS Code means a warning — usually that you used `sorry`. Red means an actual error.
+**Q: I'm stuck on a proof.**
+1. Read the Lean Infoview — what's the goal? What hypotheses exist?
+2. Try `exact?`, `simp`, `omega`, `ring`, `aesop`
+3. Use `#check` to explore relevant lemmas
+4. Ask on [Lean Zulip](https://leanprover.zulipchat.com/)
 
-**Q: How do I search for lemmas?**
-Inside a tactic proof, type `exact?`, `apply?`, or `rw?` and Lean will search for matching lemmas. You can also search the [Mathlib docs](https://leanprover-community.github.io/mathlib4_docs/) online.
+**Q: How do I start with AI/Lean tools?**
+See `AIIntegration/ToolsSetup.lean`. Start with `pip install lean-dojo` and extract proof data from your own files.
 
-**Q: I'm stuck on a proof. What do I do?**
-1. Look at the Lean Infoview — what's your goal? What hypotheses do you have?
-2. Try `exact?` or `apply?` to see if Lean can find a lemma
-3. Try `simp` or `omega` or `ring` — automation solves many goals
-4. Ask on [Lean Zulip](https://leanprover.zulipchat.com/) — the community is incredibly helpful
+---
+
+## Community
+
+- [Lean Zulip Chat](https://leanprover.zulipchat.com/) — main community hub, very welcoming
+- [Mathlib Initiative](https://mathlib-initiative.org/) — strategic support for the Mathlib ecosystem
+- [Lean FRO](https://lean-fro.org/) — Lean Focused Research Organization
+- [Harmonic](https://harmonic.fun/) — Aristotle program and AI/Lean research
 
 ---
 
 ## License
 
-This project is open source. Use it, share it, learn from it.
+This project is open source. Use it, share it, learn from it, build on it.

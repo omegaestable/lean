@@ -12,3 +12,7 @@ lean_lib LeanLab where
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4" @ "master"
+
+-- Uncomment to add LeanCopilot (AI-assisted tactic suggestions):
+-- require LeanCopilot from git
+--   "https://github.com/lean-dojo/LeanCopilot" @ "main"

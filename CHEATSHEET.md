@@ -177,3 +177,42 @@ sq_nonneg          -- 0 ≤ a ^ 2
 | `\d` or `\del` | δ | delta |
 
 **Tip:** In VS Code with the lean4 extension, type `\` followed by the abbreviation and press space to convert.
+
+---
+
+## Metaprogramming Quick Reference
+
+| Concept | Type | Purpose |
+|---------|------|---------|
+| `TacticM` | Monad | The monad tactics execute in |
+| `getMainGoal` | `TacticM MVarId` | Get current goal |
+| `getMainTarget` | `TacticM Expr` | Get goal type |
+| `getLCtx` | `TacticM LocalContext` | Get hypotheses |
+| `logInfo m!"..."` | `TacticM Unit` | Print to Infoview |
+| `Expr` | Type | Internal representation of terms |
+| `Name` | Type | Hierarchical identifiers |
+| `elab "name" : tactic => ...` | Declaration | Define custom tactic |
+| `macro "name" : tactic => ...` | Declaration | Define syntax macro |
+
+---
+
+## Lake Commands (Build System)
+
+```bash
+lake update          # Update dependencies (fetch Mathlib)
+lake build           # Build the project
+lake clean           # Clean build artifacts
+lake env printPaths  # Show resolved paths
+```
+
+---
+
+## VS Code Shortcuts (lean4 extension)
+
+| Action | Shortcut |
+|--------|----------|
+| Restart Lean server | Ctrl+Shift+P → "Lean 4: Restart Server" |
+| Toggle Infoview | Ctrl+Shift+P → "Lean 4: Infoview: Toggle" |
+| Go to definition | F12 or Ctrl+Click |
+| Hover for type info | Mouse hover |
+| Show all errors | Ctrl+Shift+M |
