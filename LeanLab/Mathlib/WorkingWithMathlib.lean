@@ -9,11 +9,24 @@ import Mathlib.Data.Set.Basic
 /-!
 # Phase 2B — Working with Mathlib: Real Formalization Workflow
 
+The previous file taught you how to FIND lemmas. This file teaches you
+how to USE them fluently. You'll learn the proof patterns that experienced
+Lean users reach for naturally — patterns that turn a frustrating proof
+attempt into a clean, readable argument.
+
 ## What this file covers
 - Importing and navigating Mathlib
 - Working with Mathlib's algebraic hierarchy (typeclasses)
 - Proof engineering patterns used in real Mathlib contributions
 - How to structure a formalization project that builds on Mathlib
+
+## Learning objectives
+After this file you will be able to:
+  1. Understand Mathlib's typeclass hierarchy and why it exists
+  2. Work with sets as predicates
+  3. Use `calc`, `have`, `suffices`, and `convert` fluently
+  4. Read and write Mathlib-style proofs
+  5. Know the Mathlib contribution workflow
 
 ## Why this matters for AI/Lean research
 AI models like Aristotle, DeepSeek-Prover, and AlphaProof are trained on
@@ -26,6 +39,12 @@ Mathlib proofs. Understanding Mathlib conventions is essential for:
 -- ============================================================
 -- SECTION 1: Mathlib's typeclass hierarchy
 -- ============================================================
+
+-- 💡 KEY INSIGHT: Typeclasses are how Lean knows that ℤ is a ring,
+-- that ℚ is a field, that ℝ is an ordered field, etc. When you write
+-- `[CommRing R]`, Lean automatically infers that R is also a Ring,
+-- a Monoid, an AddGroup, and everything else in the hierarchy below.
+-- You don't need to state all of these — Lean figures it out.
 
 /-!
 Mathlib organizes mathematics through **typeclasses** — a Lean mechanism
@@ -78,7 +97,13 @@ example : ({1, 2} : Set Nat) ⊆ {1, 2, 3} := by
 -- SECTION 3: Proof engineering patterns
 -- ============================================================
 
+-- 💡 These five patterns cover 90% of the proof moves you'll ever make.
+-- Master them and you'll be able to structure any proof clearly.
+-- Think of them as your "proof vocabulary."
+
 -- PATTERN 1: `calc` for readable chains (this is how Mathlib proofs look)
+-- Use when: You want to show A ≤ B ≤ C or A = B = C step by step.
+-- Each line has `_ rel RHS := by justification`.
 example (a b c d : ℤ) (h1 : a ≤ b) (h2 : c ≤ d) : a + c ≤ b + d := by
   calc a + c ≤ b + c := by linarith
     _ ≤ b + d := by linarith
@@ -109,6 +134,9 @@ example (a b c d : ℤ) (h1 : a ≤ b) (h2 : c ≤ d)
 
 /-!
 ## How Mathlib contributions work
+Contributing to Mathlib is a fantastic way to learn and to advance
+formal mathematics. Even small contributions (improving documentation,
+adding a missing lemma, fixing a proof) are valued by the community.
 
 1. **Find something to formalize**: Check the Mathlib project board,
    Zulip discussions, or identify gaps in your area.

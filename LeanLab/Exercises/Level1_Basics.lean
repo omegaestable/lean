@@ -1,8 +1,25 @@
 /-!
 # Exercises — Level 1: Basics
 
-Complete each `sorry` with an actual proof.
-Difficulty: ⭐ (should be doable after reading Basics/ files)
+Welcome to your first exercise set! The goal is simple: replace
+every `sorry` with something that makes Lean happy (green squiggles
+gone, no red errors). `sorry` is Lean's way of saying "I'll trust
+you for now" — but you need to replace it with real proofs.
+
+## How to work through these
+  1. Open this file in VS Code with the Lean 4 extension
+  2. Place your cursor after a `by sorry` line
+  3. Delete `sorry` and start typing tactics
+  4. Watch the Infoview panel — it shows what Lean expects
+
+## Difficulty: ⭐ (should be doable after reading Basics/ files)
+
+## Tactics you'll need
+  - `rfl` — proves goals of the form `a = a`
+  - `decide` — proves decidable propositions by computation
+  - `norm_num` — proves numerical facts
+  - `simp` — simplifies using known lemmas
+  - `omega` — solves linear arithmetic over ℕ and ℤ
 
 Hints are provided. Try without them first!
 -/
@@ -22,7 +39,11 @@ example : "hello" ++ " " ++ "world" = "hello world" := by sorry
 -- FUNCTIONS
 -- ============================================================
 
--- Write these functions (replace `sorry` with implementations)
+-- Now write some actual Lean functions. Replace `sorry` with
+-- a working implementation. Remember:
+--   - `fun n => ...` for anonymous functions
+--   - `match n with | ...` for pattern matching
+--   - Nat has two constructors: `0` and `n + 1` (i.e., `Nat.succ n`)
 
 -- Returns true if n is zero
 def isZero' : Nat → Bool := sorry
@@ -62,6 +83,10 @@ def lastOrZero : List Nat → Nat := sorry
 -- ============================================================
 -- SIMPLE PROOFS
 -- ============================================================
+
+-- Now combine your Lean knowledge with proof tactics.
+-- Start with `rfl` (reflexivity). If that doesn't work, try
+-- `decide`, `simp`, or `omega`. Read the Infoview for clues!
 
 -- Hint: rfl
 example : (fun x : Nat => x + 1) 5 = 6 := by sorry

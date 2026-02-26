@@ -5,22 +5,51 @@ import Mathlib.Algebra.Ring.Basic
 /-!
 # 08 — Algebra: Groups, Rings, and Fields in Lean
 
+This is where Lean starts to feel like a real math textbook.
+You'll work with the same abstract structures you studied in algebra
+class — groups, rings, fields — but now Lean ensures every step
+of your reasoning is correct.
+
 ## Mathlib's algebraic hierarchy
 Mathlib has a rich hierarchy of algebraic structures.
-You don't define "a group" from scratch — you use typeclasses:
+You don't define "a group" from scratch — you use **typeclasses**:
   - `Monoid`, `Group`, `CommGroup`
   - `Ring`, `CommRing`, `Field`
   - `Module`, `Algebra`
 
-This file shows you how to work with abstract algebra in Lean.
+When you write `[CommRing R]`, Lean automatically knows R is also
+a Ring, an AddCommGroup, a Monoid, etc. — the whole hierarchy
+is inferred for you.
+
+## Learning objectives
+After this file you will be able to:
+  1. State and prove facts about abstract groups
+  2. Use the `ring` tactic for polynomial identities
+  3. Use `linarith` and `positivity` for inequalities
+  4. Understand how Lean's typeclasses encode the algebraic hierarchy
+  5. Prove things about concrete types (ℤ, ℚ) using abstract lemmas
+
+## The power of abstraction
+When you prove `(a + b)² = a² + 2ab + b²` for a CommRing,
+that single proof works for ℤ, ℚ, ℝ, ℂ, polynomials, matrices,
+and any future type that someone makes into a CommRing.
+This is the payoff of abstract algebra — prove once, use everywhere.
 -/
 
 -- ============================================================
 -- SECTION 1: Working with groups
 -- ============================================================
 
--- In Lean, `Group G` means G is a group.
--- The group operation is `*` (multiplicative notation) or `+` (additive notation).
+-- In Lean, `Group G` means G is a group (with multiplicative notation).
+-- The group operation is `*`, identity is `1`, and inverses are `⁻¹`.
+--
+-- For additive groups, use `AddGroup G` — then `+`, `0`, and `-` are used.
+--
+-- 💡 TIP: Most Mathlib lemmas exist in both multiplicative and additive
+-- versions. If you can't find `add_comm`, try searching for `mul_comm`.
+--
+-- Lean knows all the group axioms as named lemmas. You'll use them
+-- like building blocks:
 
 -- Lean knows group axioms as lemmas:
 -- `mul_assoc`   : a * b * c = a * (b * c)

@@ -6,10 +6,23 @@ import Mathlib.Algebra.Ring.Basic
 /-!
 # Phase 2A — Searching Mathlib: Finding What You Need
 
+This might be the most *practically useful* file in the whole course.
+Mathlib is a vast library — and your ability to find the right lemma
+is the single biggest factor for productivity. This is a skill that
+grows with practice: after a while, you'll develop an intuition for
+Mathlib's naming conventions and reach for `exact?` without thinking.
+
 ## Why this matters
 Mathlib has over 200,000 lemmas. Nobody memorizes them.
 The skill isn't knowing every lemma — it's knowing HOW TO FIND the right one.
 This is also exactly what AI models need to do (premise selection).
+
+## Learning objectives
+After this file you will be able to:
+  1. Use `exact?`, `apply?`, `rw?`, and `simp?` to search inside proofs
+  2. Predict lemma names from Mathlib's naming conventions
+  3. Know when to use Loogle vs Moogle vs documentation
+  4. Quickly find the right tool for a given proof situation
 
 ## Tools covered
 - `exact?`, `apply?`, `rw?`, `simp?` — interactive search from inside proofs
@@ -21,6 +34,16 @@ This is also exactly what AI models need to do (premise selection).
 -- ============================================================
 -- SECTION 1: In-proof search tactics
 -- ============================================================
+
+-- 💡 THE "I'M STUCK" TOOLKIT: These four tactics are your best friends.
+-- When you don't know how to proceed,  try them in this order:
+--   exact?  → "Does a single lemma finish this?"
+--   apply?  → "What lemma could I apply here?"
+--   rw?     → "What could I rewrite?"
+--   simp?   → "Can simp solve this? If so, what did it use?"
+--
+-- They're SLOW (they search the whole library) so be patient.
+-- In VS Code, results appear in the Infoview panel after a few seconds.
 
 -- `exact?` — "Is there a single lemma that closes this goal?"
 -- Place your cursor after `exact?` and look at the Infoview suggestions.
@@ -131,8 +154,14 @@ A newer semantic search tool for Mathlib declarations.
 -- SECTION 4: Practice — find the right lemma
 -- ============================================================
 
--- For each of these, first try to GUESS the lemma name,
--- then use `exact?` to verify.
+-- 🎯 EXERCISE STRATEGY: For each problem below:
+--   Step 1: Read the statement and try to GUESS the Mathlib name.
+--           Use the naming conventions from Section 2!
+--   Step 2: Replace `sorry` with your guess and see if it works.
+--   Step 3: If stuck, use `exact?` to find the right lemma.
+--   Step 4: Compare what `exact?` found with your guess.
+--
+-- This builds the intuition that will make you fast at Lean.
 
 -- 1. Multiplication is commutative
 example (a b : Nat) : a * b = b * a := by

@@ -8,12 +8,25 @@ import Mathlib.Analysis.SpecificLimits.Basic
 /-!
 # Phase 4B — Autoformalization: Bridging Informal and Formal Math
 
+Autoformalization is often called the "holy grail" of AI + formal math.
+If we could reliably translate any textbook theorem into Lean, we could
+verify (or disprove!) the entire mathematical literature. We're not
+there yet — but you'll see that the pieces are falling into place.
+
 ## What is autoformalization?
 The automatic translation of informal mathematical text (as found in
 textbooks, papers, and competition problems) into formal Lean 4 code.
 
 This is one of the most active research areas in AI/Lean integration
 and a key theme of the Harmonic Aristotle program.
+
+## Learning objectives
+After this file you will be able to:
+  1. Translate simple informal theorems into Lean 4 statements
+  2. Recognize the five most common autoformalization pitfalls
+  3. Understand the agentic pipeline (Translate → Verify → Fix)
+  4. Know why iterative approaches outperform single-shot translation
+  5. Begin building your own autoformalization portfolio
 
 ## This file contains
 - Worked examples of autoformalization (informal → formal)
@@ -25,6 +38,12 @@ and a key theme of the Harmonic Aristotle program.
 -- ============================================================
 -- SECTION 1: Worked examples — Informal to Formal
 -- ============================================================
+
+-- The best way to learn autoformalization is by example.
+-- For each problem, we show the informal statement, the
+-- translation DECISIONS, and the final Lean code.
+-- Pay attention to the "Analysis" blocks — they explain
+-- the thought process, not just the result.
 
 /-!
 ## Example 1
@@ -86,6 +105,10 @@ def SeqConvergesTo' (a : ℕ → ℝ) (L : ℝ) : Prop :=
 -- ============================================================
 -- SECTION 2: Common autoformalization pitfalls
 -- ============================================================
+
+-- ⚠️ READ THIS CAREFULLY. These pitfalls trip up both humans AND
+-- LLMs. If an autoformalized statement looks correct but Lean
+-- rejects it, the cause is almost always one of these five issues.
 
 /-!
 ## Pitfall 1: Type mismatches
@@ -155,8 +178,12 @@ whether your answer is correct.
 -- SECTION 4: Exercises — Formalize these!
 -- ============================================================
 
+-- 🎯 THE REAL TEST: Can you go from English to Lean on your own?
 -- For each informal statement, write the formal Lean 4 version
 -- AND prove it (or use `sorry` if the proof is too hard).
+--
+-- TIP: If you're unsure about types, start with `#check` commands
+-- to explore what Mathlib has available. Use `exact?` for proofs.
 
 -- 1. "The product of two odd numbers is odd"
 -- (odd n means ∃ k, n = 2 * k + 1)

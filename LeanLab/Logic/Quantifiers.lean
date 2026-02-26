@@ -3,20 +3,39 @@ import Mathlib.Tactic
 /-!
 # 05 — Quantifiers: For All and There Exists
 
+This is where Lean starts to feel like real mathematics. If the previous
+file was about logic puzzles, this file is about mathematical reasoning.
+
 ## The mathematical heart of Lean
-This is where it gets exciting for mathematicians.
 - `∀ x, P x` = "for all x, P(x) holds" = a dependent function
 - `∃ x, P x` = "there exists x such that P(x)" = a dependent pair
+
+## Learning objectives
+After this file you will be able to:
+  1. Prove universal statements with `intro`
+  2. Prove existential statements with `use` (providing a witness)
+  3. Destructure existential hypotheses with `obtain`
+  4. Use `rw` (rewrite) and `calc` blocks for equational reasoning
+  5. Work with classical logic (`by_contra`, excluded middle)
+
+## A note on `use`
+The `use` tactic is one of the most satisfying in Lean. When your goal
+is `∃ x, P x`, you say `use 42` (or whatever your witness is), and
+Lean immediately asks you to prove `P 42`. You've made an existence
+claim concrete!
 -/
 
 -- ============================================================
 -- SECTION 1: Universal quantifier (∀)
 -- ============================================================
 
--- ∀ is just a function! `∀ n : Nat, P n` means:
--- "give me any Nat, and I'll give you a proof of P for that Nat"
-
--- This is literally the same as a function with a dependent return type.
+-- 💡 MENTAL MODEL: ∀ is just a function!
+-- `∀ n : Nat, P n` means:
+-- "give me ANY Nat, and I'll give you a proof of P for that Nat."
+--
+-- This is literally the same as a dependent function type.
+-- To PROVE ∀ x, P x: use `intro x` (let x be arbitrary), then prove P x.
+-- To USE  h : ∀ x, P x: apply it to a specific value, e.g., `h 42`.
 
 theorem all_add_zero : ∀ n : Nat, n + 0 = n := by
   intro n              -- "let n be an arbitrary Nat"
@@ -36,8 +55,15 @@ theorem all_impl : ∀ n : Nat, n > 0 → n ≥ 1 := by
 -- SECTION 2: Existential quantifier (∃)
 -- ============================================================
 
--- ∃ x, P x means "I can give you a specific x and a proof that P x holds"
--- To prove it, you provide the WITNESS and the PROOF.
+-- 💡 MENTAL MODEL: ∃ is a pair — a WITNESS plus a PROOF about that witness.
+-- `∃ x, P x` means "I have a specific x, and P holds for that x."
+--
+-- To PROVE ∃ x, P x:
+--   1. Use `use value` to provide your witness
+--   2. Then prove that P holds for your specific value
+--
+-- To USE h : ∃ x, P x:
+--   Use `obtain ⟨x, hx⟩ := h` to get the witness `x` and proof `hx`.
 
 theorem exists_even : ∃ n : Nat, n % 2 = 0 := by
   use 42               -- "I claim n = 42 works" (the witness)
@@ -73,10 +99,17 @@ example : ∀ n : Nat, ∃ m : Nat, m > n := by
 -- SECTION 4: Equality
 -- ============================================================
 
--- Equality is central. Key tactics:
--- `rfl`     : proves a = a (reflexivity)
--- `rw [h]`  : if h : a = b, replaces a with b in the goal
--- `calc`    : chain of equalities (very mathematical!)
+-- Equality is the most fundamental relation in mathematics, and Lean
+-- has powerful tools for working with it. These three tactics will
+-- handle 90% of your equality proofs:
+--
+-- `rfl`     : proves a = a (reflexivity) — "both sides are the same"
+-- `rw [h]`  : if h : a = b, replaces a with b in the goal — "substitute"
+-- `calc`    : chain of equalities — "step-by-step, like on paper"
+--
+-- 💡 TIP: `calc` blocks are how experienced Lean users write readable
+-- proofs. They look just like the chain-of-equalities proofs you'd
+-- write on a whiteboard. Get comfortable with them early!
 
 -- The `rw` (rewrite) tactic
 theorem rw_example (a b c : Nat) (h1 : a = b) (h2 : b = c) : a = c := by

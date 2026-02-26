@@ -3,17 +3,42 @@ import Mathlib.Tactic
 /-!
 # 06 — Tactics: Your Proof Toolbox
 
+This file is your **reference guide** for tactics. You've already seen
+many of these in the previous files — now we consolidate them in one place
+with clear examples and a quick-reference table.
+
+Come back to this file whenever you forget what a tactic does!
+
 ## What are tactics?
 Tactics are commands that transform proof goals step by step.
 Think of them as "moves" in a proof game:
   - You start with a GOAL (what you need to prove)
   - Each tactic transforms the goal into simpler subgoals
   - When no goals remain, the proof is complete
+  - Lean ensures every move is valid — you can't cheat!
+
+## Learning objectives
+After this file you will:
+  1. Know the core tactics (intro, exact, apply, constructor, cases, obtain)
+  2. Know the rewriting tactics (rw, simp)
+  3. Know the "power tactics" (omega, norm_num, ring, linarith, aesop)
+  4. Understand when to use which tactic
+  5. Have a reference table you can come back to
 
 ## Reading tactic proofs
 After each tactic, look at the "Lean Infoview" panel in VS Code.
 It shows your current goals and hypotheses. This is ESSENTIAL.
 Put your cursor on each line to see the state at that point.
+
+## The "I'm stuck" ladder
+When you don't know which tactic to use, try these in order:
+  1. `exact?` — does a single lemma close the goal?
+  2. `simp` — can simplification handle it?
+  3. `omega` — is it arithmetic?
+  4. `ring` — is it an algebraic identity?
+  5. `linarith` — do the hypotheses imply the goal linearly?
+  6. `aesop` — can automated search figure it out?
+  7. *Think* — what's the mathematical idea? Break it into steps with `have`.
 -/
 
 -- ============================================================
@@ -56,6 +81,10 @@ example (P Q : Prop) (h : P ∧ Q) : Q := by
 -- SECTION 2: Rewriting tactics
 -- ============================================================
 
+-- Rewriting is one of the most common things you'll do in proofs.
+-- The key idea: if you know a = b, you can replace a with b anywhere.
+-- This is so fundamental that it has its own dedicated tactics.
+
 -- RW (rewrite): substitutes equal things
 example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
   rw [h]               -- replaces a with b everywhere in the goal
@@ -82,6 +111,13 @@ example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
 -- ============================================================
 -- SECTION 3: Arithmetic and decision tactics
 -- ============================================================
+
+-- These are the "just solve it" tactics for arithmetic. They're
+-- incredibly powerful — learn when to reach for each one!
+--
+-- `omega`    — linear equations and inequalities over ℕ and ℤ
+-- `norm_num` — concrete numerical calculations (2 + 3 = 5)
+-- `decide`   — finite/decidable propositions (can the computer check all cases?)
 
 -- OMEGA: solves linear arithmetic over Nat and Int
 example (n : Nat) : n + 1 > n := by omega
@@ -124,8 +160,14 @@ example (P Q : Prop) (hpq : P → Q) (hp : P) : Q := by
 -- SECTION 5: Power tactics (the "just solve it" tactics)
 -- ============================================================
 
+-- These tactics use sophisticated automation to close goals.
+-- They're great for finishing proofs, but DON'T rely on them exclusively —
+-- understanding WHY a proof works is more valuable than just closing goals.
+-- Use them when the mathematical insight is clear but the Lean details
+-- are tedious.
+
 -- AESOP: Automated Extensible Search for Obvious Proofs
--- It tries many tactics automatically
+-- It tries many tactics automatically — good for "obvious" goals
 example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
   aesop
 

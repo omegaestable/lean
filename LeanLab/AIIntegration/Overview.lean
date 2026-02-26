@@ -3,6 +3,14 @@ import Mathlib.Tactic
 /-!
 # Phase 4A — AI-Assisted Theorem Proving: The Landscape
 
+Everything you've learned so far — Lean syntax, logic, tactics,
+Mathlib, metaprogramming — feeds directly into this section.
+AI-assisted theorem proving is the reason many people learn Lean,
+and this file will show you how all the pieces connect.
+
+Read this file *actively*: place your cursor on the `by` blocks and
+watch the Infoview panel. That's exactly what an AI model "sees."
+
 ## The big picture
 AI-assisted theorem proving is the intersection of:
 - **Formal methods** (Lean, Coq, Isabelle)
@@ -20,6 +28,14 @@ the field and connect your Lean skills to AI applications.
 - **LeanCopilot** (Caltech/LeanDojo) — VS Code integration
 - **COPRA / ReProver** — research systems for tactic prediction
 
+## Learning objectives
+After this file you will be able to:
+  1. Explain how AI models interact with Lean proof states
+  2. Describe the (state, tactic, next_state) training data format
+  3. Name the major benchmarks and their purposes
+  4. Identify the main research directions in AI-assisted proving
+  5. Understand the proof search problem formulation
+
 ## What this file covers
 - How AI interacts with Lean (the proof state API)
 - Training data: what it looks like and where it comes from
@@ -30,6 +46,11 @@ the field and connect your Lean skills to AI applications.
 -- ============================================================
 -- SECTION 1: The Proof State — What AI "Sees"
 -- ============================================================
+
+-- 💡 THIS IS THE MOST IMPORTANT CONCEPT FOR AI+LEAN.
+-- Every AI theorem prover works by reading proof states and
+-- predicting tactics. If you understand proof states, you
+-- understand 90% of how these systems work.
 
 /-!
 When you write a tactic proof, at each step there is a **proof state**:
@@ -239,6 +260,9 @@ formal verification. If we can autoformalize reliably, we can:
 -- ============================================================
 -- SECTION 6: Research directions for the Aristotle grant
 -- ============================================================
+
+-- This section maps the research landscape. If you're looking for
+-- a project direction or wondering "what's unsolved?", start here.
 
 /-!
 ## Directions aligned with Harmonic's MSI goals

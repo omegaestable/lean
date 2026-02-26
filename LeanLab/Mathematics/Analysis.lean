@@ -7,6 +7,10 @@ import Mathlib.Analysis.Normed.Group.Basic
 /-!
 # 09 — Analysis: Limits, Continuity, and Beyond
 
+Welcome to the most challenging (and rewarding!) topic in this course.
+Formalizing analysis means making every ε-δ argument *completely explicit*
+— no more "for ε sufficiently small" hand-waving.
+
 ## Analysis in Lean
 Mathlib has a full development of real analysis, topology, and measure theory.
 This file gives you a taste of how mathematical analysis looks in Lean.
@@ -14,6 +18,22 @@ This file gives you a taste of how mathematical analysis looks in Lean.
 Fair warning: analysis in Lean is harder than algebra because it involves
 ε-δ arguments that require careful manipulation. But the patterns become
 natural with practice.
+
+## Learning objectives
+After this file you will be able to:
+  1. Work with absolute values and basic real inequalities
+  2. Write the ε-δ definition of convergence
+  3. Prove that constant sequences converge
+  4. Navigate Mathlib's topology and metric space APIs
+  5. Understand how Mathlib generalizes analysis with filters
+
+## Why ε-δ proofs are hard in Lean
+In a textbook, you might write "choose N > 1/ε." In Lean, you need to:
+  1. Prove that such an N exists (Archimedean property)
+  2. Construct it explicitly
+  3. Prove the bound |a_n - L| < ε for all n ≥ N
+Every step must be justified. This is tedious at first but builds
+deep understanding of what the proof actually requires.
 -/
 
 -- ============================================================
@@ -32,9 +52,19 @@ example (a : ℝ) (h : |a| < 1) : -1 < a := by linarith [abs_lt.mp h]
 -- SECTION 2: Sequences (a taste of what ε-δ proofs look like)
 -- ============================================================
 
--- A sequence is just a function ℕ → ℝ
+-- A sequence is just a function ℕ → ℝ. That's it — nothing fancy!
 -- "a_n converges to L" is written: Filter.Tendsto a Filter.atTop (nhds L)
--- But let's work with the raw ε-definition first to see what's happening:
+-- in Mathlib's general framework.
+--
+-- But let's work with the raw ε-definition first to see what's really
+-- happening beneath the abstraction. This is the definition you learned
+-- in analysis class, translated directly into Lean:
+--
+-- 💡 PATTERN FOR ε-δ PROOFS:
+--   1. `intro ε hε` — let ε > 0 be given
+--   2. `use N` — exhibit your choice of N (the hard part!)
+--   3. `intro n hn` — let n ≥ N
+--   4. Prove |a n - L| < ε using `linarith`, `norm_num`, `abs_lt`, etc.
 
 -- Definition: a sequence a converges to L if
 -- ∀ ε > 0, ∃ N, ∀ n ≥ N, |a n - L| < ε

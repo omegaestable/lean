@@ -1,6 +1,26 @@
 # Lean 4 Tactic Cheat Sheet
 
-A quick reference for the most common tactics. Keep this open while proving!
+A quick reference for the most common tactics. **Keep this open in a split tab while proving!**
+
+## How to use this sheet
+
+When you're stuck in a proof, follow this decision tree:
+
+1. **What shape is my goal?** Look at the symbol after `⊢` in the Infoview.
+   - Starts with `→` or `∀`? → Use `intro`
+   - Is `P ∧ Q`? → Use `constructor`
+   - Is `P ∨ Q`? → Use `left` or `right`
+   - Is `∃ x, ...`? → Use `use value`
+   - Is `a = a`? → Use `rfl`
+   - Is a number fact? → Try `omega`, `norm_num`, or `ring`
+
+2. **What hypotheses do I have?** Look above the `⊢` line.
+   - Have `h : P ∧ Q`? → Use `obtain ⟨hp, hq⟩ := h`
+   - Have `h : P ∨ Q`? → Use `rcases h with hp | hq`
+   - Have `h : a = b`? → Use `rw [h]`
+   - Have exactly what you need? → Use `exact h`
+
+3. **None of the above?** → Try `exact?`, `simp`, or `aesop`
 
 ---
 
@@ -58,6 +78,10 @@ A quick reference for the most common tactics. Keep this open while proving!
 
 ## Power Tactics (Automation)
 
+These are your "big guns." When manual tactics feel tedious, these
+can often close the goal in one shot. Learn which problems each one
+handles and you'll be 10× faster at proving.
+
 | Tactic | Solves |
 |--------|--------|
 | `rfl` | `a = a` (definitional equality) |
@@ -111,6 +135,10 @@ calc a = b := by ...
 
 ## Searching for Lemmas
 
+When you don't know which lemma to use, these commands search
+Mathlib for you. They're slow (a few seconds) but invaluable.
+Results appear in the **Infoview** panel.
+
 | Command | What it does |
 |---------|-------------|
 | `exact?` | "What lemma closes this goal?" |
@@ -141,6 +169,10 @@ sq_nonneg          -- 0 ≤ a ^ 2
 ---
 
 ## Unicode Input (VS Code)
+
+Lean uses Unicode symbols extensively. In VS Code with the lean4 extension,
+type `\` followed by the abbreviation and press **space** to convert.
+Don't memorize these — learn them as you encounter them!
 
 | Type | Get | Meaning |
 |------|-----|---------|
@@ -177,6 +209,19 @@ sq_nonneg          -- 0 ≤ a ^ 2
 | `\d` or `\del` | δ | delta |
 
 **Tip:** In VS Code with the lean4 extension, type `\` followed by the abbreviation and press space to convert.
+
+---
+
+## Troubleshooting Common Errors
+
+| Error Message | Likely Cause | Fix |
+|--------------|-------------|-----|
+| `unknown identifier` | Typo or missing import | Check spelling, add `import Mathlib.Tactic` |
+| `type mismatch` | Wrong type (e.g., ℕ vs ℤ) | Check types with `#check`, add casts |
+| `unsolved goals` | Proof is incomplete | Look at Infoview for remaining goals |
+| `tactic 'simp' failed` | simp can't solve this | Try `omega`, `ring`, or manual tactics |
+| `failed to synthesize instance` | Missing typeclass | Add `[Group G]` or similar to hypotheses |
+| `declaration uses 'sorry'` | Contains unproved parts | Replace all `sorry` with actual proofs |
 
 ---
 

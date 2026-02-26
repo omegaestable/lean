@@ -3,6 +3,10 @@ import Mathlib.Tactic
 /-!
 # 07 — Natural Numbers: Building Math from Scratch
 
+Welcome to "real" mathematics in Lean! The previous files taught you
+the language and logic. Now you'll use those skills to prove actual
+theorems about numbers.
+
 ## Why start here?
 The natural numbers are where all of mathematics begins in Lean.
 Nat is defined inductively: you have `zero` and `succ`.
@@ -10,16 +14,42 @@ Everything else (addition, multiplication, ordering) is built on top.
 
 This file shows you how to prove things about ℕ that you "know" are true,
 but now you'll understand WHY they're true at a foundational level.
+
+## Learning objectives
+After this file you will be able to:
+  1. Prove theorems by mathematical induction
+  2. Work with divisibility (`a ∣ b`)
+  3. Reason about modular arithmetic
+  4. Understand why "obvious" facts need proof in Lean
+
+## Why "obvious" facts need proof
+You might wonder: why prove 0 + n = n? Isn't that obvious?
+The answer reveals something deep about Lean. Addition on Nat is
+defined by recursion on the FIRST argument:
+    Nat.add 0 m     = m           (by definition)
+    Nat.add (n+1) m = (Nat.add n m) + 1  (by definition)
+So `0 + n = n` is true by the FIRST equation (just unfold the def).
+But `n + 0 = n` requires induction! The definition doesn't simplify
+`n + 0` directly — it only pattern-matches on the first argument.
+This asymmetry is subtle and important.
 -/
 
 -- ============================================================
 -- SECTION 1: Induction — the fundamental proof technique for ℕ
 -- ============================================================
 
--- The induction principle for Nat:
--- To prove P(n) for all n, prove:
---   1. P(0)          (base case)
---   2. P(n) → P(n+1) (inductive step)
+-- 💡 MENTAL MODEL: Induction is like climbing an infinite ladder.
+-- To prove you can reach every rung:
+--   1. Show you can stand on the first rung (base case: P(0))
+--   2. Show that if you're on rung n, you can step to rung n+1
+--      (inductive step: P(n) → P(n+1))
+--
+-- In Lean, `induction n with` gives you two goals:
+--   | zero => ...        — the base case
+--   | succ k ih => ...   — the step, where `ih` is the inductive hypothesis
+--
+-- `ih` is the key! It says "P(k) is already proved" and you use it
+-- to prove P(k+1).
 
 -- Let's prove 0 + n = n (this is NOT trivial — addition is defined by
 -- recursion on the FIRST argument, so `0 + n` doesn't simplify directly
@@ -41,6 +71,12 @@ theorem add_assoc' (a b c : Nat) : (a + b) + c = a + (b + c) := by
 -- ============================================================
 -- SECTION 2: Divisibility
 -- ============================================================
+
+-- 💡 KEY DEFINITION: a ∣ b ("a divides b") means ∃ k, b = a * k.
+-- It's an existential statement! To prove a ∣ b, you `use` the
+-- quotient k and then show that b = a * k.
+--
+-- The symbol ∣ is typed with \| or \dvd (NOT the regular pipe |).
 
 -- a ∣ b means "a divides b", i.e., ∃ k, b = a * k
 

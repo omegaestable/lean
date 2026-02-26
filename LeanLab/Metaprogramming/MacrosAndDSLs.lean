@@ -5,11 +5,31 @@ import Mathlib.Tactic
 /-!
 # Phase 3B — Macros, Syntax Extensions, and DSLs
 
+In the previous file you wrote tactics by working directly with proof
+states (the `TacticM` monad). In this file you'll learn a *simpler*
+approach: **macros**, which are syntax-to-syntax transformations.
+Macros don't know about proof states — they just rewrite your code
+before Lean sees it. Think of them as sophisticated find-and-replace.
+
 ## What this covers
 - Lean 4's macro system (hygienic macros)
 - Custom syntax (notations, commands, tactics)
 - Building domain-specific languages (DSLs)
 - Practical examples for mathematical proof automation
+
+## Learning objectives
+After this file you will be able to:
+  1. Write simple macros that combine existing tactics
+  2. Define custom notations to make proofs more readable
+  3. Create custom top-level commands
+  4. Understand Lean's elaboration pipeline
+  5. Know when to use a macro vs. a full tactic
+
+## The difference: macros vs. tactics
+  - **Macro** — rewrites syntax BEFORE elaboration. Simpler. No proof state access.
+  - **Tactic (elab)** — runs code DURING elaboration. More powerful. Can read goals.
+  Rule of thumb: if you're just combining existing tactics, use a macro.
+  If you need to inspect the proof state, use `elab`.
 
 ## Why this matters for the Aristotle program
 Lean 4's extensibility is one of its key advantages over other proof assistants.
@@ -26,8 +46,15 @@ open Lean Elab Tactic Meta
 -- SECTION 1: Simple macros
 -- ============================================================
 
--- Macros are syntax-to-syntax transformations.
--- They run at elaboration time and expand into Lean code.
+-- 💡 THE MACRO RECIPE:
+--   macro "name" : tactic => `(tactic| ... lean tactics ...)
+--
+-- The backtick-parentheses `(tactic| ...) is a "syntax quotation"
+-- — it says "produce the syntax for these tactics." Lean then
+-- expands it before type-checking, as if you'd written the
+-- expanded form yourself.
+--
+-- Macros are HYGIENIC, meaning local names don't leak or clash.
 
 -- A simple proof macro
 macro "qed" : tactic =>
@@ -116,11 +143,14 @@ example (a b c d : Int) (h1 : a ≤ b) (h2 : b ≤ c) (h3 : c ≤ d) : a ≤ d :
 /-!
 ## How Lean processes your code
 
+💡 Understanding this pipeline helps you debug mysterious errors.
+If a macro does something unexpected, think about which stage it fails at.
+
 1. **Parsing**: Text → Syntax tree (CST)
-2. **Macro expansion**: Macros transform syntax → syntax
-3. **Elaboration**: Syntax → Expr (the internal representation)
+2. **Macro expansion**: Macros transform syntax → syntax ← macros live here!
+3. **Elaboration**: Syntax → Expr (the internal representation) ← elab tactics live here!
 4. **Type checking**: Verify types are correct
-5. **Kernel checking**: Independent verification of the proof
+5. **Kernel checking**: Independent verification of the proof ← the trust anchor
 
 This pipeline is important because:
 - AI models typically interact at the tactic/elaboration level

@@ -1,7 +1,18 @@
 /-!
 # Exercises — Level 4: Competition Mathematics
 
-Difficulty: ⭐⭐⭐⭐ (AMC/AIME-style problems formalized in Lean)
+These problems bridge the gap between "learning Lean" and "doing
+research with Lean." They're modeled on problems from AMC, AIME,
+and IMO — the same competitions that AI systems like Aristotle
+and AlphaProof are tested on.
+
+## Difficulty: ⭐⭐⭐⭐ (AMC/AIME-style problems formalized in Lean)
+
+## Strategy guide
+  - **AMC-style**: Often solvable by `native_decide`, `norm_num`, or `omega`
+  - **AIME-style**: Need algebraic manipulation (`nlinarith`, `ring`) or case analysis
+  - **IMO-style**: Need clever algebraic tricks (introduce auxiliary expressions)
+  - **Autoformalization**: The hardest skill — translating English to Lean
 
 These exercises mimic the types of problems found in the miniF2F benchmark.
 They test both your formalization skills AND your proof skills.
@@ -78,9 +89,12 @@ theorem imo_factorial_bound (n : ℕ) (h : n ≥ 3) : n.factorial > n := by
 -- AUTOFORMALIZATION EXERCISES
 -- ============================================================
 
--- These are INFORMAL statements. Your job:
--- 1. Formalize them as Lean theorem statements
--- 2. Prove them (or use sorry if too hard)
+-- 🎯 This is the skill that AI researchers care about most.
+-- These are INFORMAL statements — no Lean code given!
+-- Your job:
+-- 1. Formalize them as Lean theorem statements (the HARD part)
+-- 2. Prove them (or use sorry if the proof is too hard)
+-- Even getting the statement right is valuable practice.
 
 -- A. "The sum of the first n odd numbers equals n²"
 -- Hint: the kth odd number is 2k + 1 (0-indexed) or 2k - 1 (1-indexed)

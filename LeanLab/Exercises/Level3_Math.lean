@@ -1,10 +1,17 @@
 /-!
 # Exercises — Level 3: Mathematics
 
-Complete each `sorry` with an actual proof.
-Difficulty: ⭐⭐⭐ (requires reading Mathematics/ files and some creativity)
+Now you're doing real mathematical proofs. These exercises range from
+computational facts to algebraic identities to an introduction to
+mathematical induction. When you're stuck:
+  1. Use `exact?` to search Mathlib for a single-lemma solution
+  2. Use `ring` for polynomial identities
+  3. Use `linarith` or `nlinarith` for linear/nonlinear inequalities
+  4. Use `omega` for natural number arithmetic
+  5. Use `norm_num` for concrete numerical goals
 
-These are more mathematically interesting. You may need to search Mathlib!
+## Difficulty: ⭐⭐⭐ (requires reading Mathematics/ files and some creativity)
+
 Use `exact?`, `apply?`, or `rw?` to find useful lemmas.
 -/
 
@@ -69,8 +76,12 @@ theorem gauss_sum (n : Nat) : 2 * (Finset.range (n + 1)).sum id = n * (n + 1) :=
   sorry
 
 -- ============================================================
--- BOSS LEVEL: Irrationality of √2
+-- 🏆 BOSS LEVEL: Irrationality of √2
 -- ============================================================
+
+-- Don't attempt this until you've completed everything above!
+-- This is genuinely hard in Lean. It's here to show you where
+-- things are headed — not to frustrate you.
 
 /-
 This is a famous proof. In Lean, it would involve:

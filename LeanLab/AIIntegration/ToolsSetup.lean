@@ -1,8 +1,23 @@
 /-!
 # Phase 4C — Setting Up AI/Lean Tools
 
-## This file is a guide (not executable Lean code for the most part)
-## It documents how to set up and use the key AI/Lean tools.
+This file is your practical setup guide. It's mostly documentation
+(not executable Lean code) because the AI tools live in the Python
+ecosystem — you'll use `pip install` rather than `import Mathlib`.
+
+## How to use this file
+Read through the tools in order. You don't need ALL of them —
+pick the one that matches your goal:
+  - **Want to extract training data?** → LeanDojo (Tool 1)
+  - **Want to build an AI prover?** → PyPantograph (Tool 2)
+  - **Want AI help while writing proofs?** → LeanCopilot (Tool 3)
+  - **Want to build a full pipeline?** → Tool 4 (architecture guide)
+  - **Want to fine-tune a model?** → Tool 5 (datasets & training)
+
+## Prerequisites
+  - Python 3.10+ (we recommend `uv` for environment management)
+  - A working Lean 4 + Mathlib setup (if you're reading this, you have it!)
+  - For GPU training: CUDA 11.8+ and a GPU with ≥ 8 GB VRAM
 
 The tools in this ecosystem require Python + Lean interop.
 This file serves as a reference for setting them up.

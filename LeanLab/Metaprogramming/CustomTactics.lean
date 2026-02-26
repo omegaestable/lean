@@ -5,6 +5,14 @@ import Mathlib.Tactic
 /-!
 # Phase 3A — Custom Tactics and Metaprogramming
 
+This is where Lean goes from being a proof assistant to being a
+*programmable proof assistant*. Everything you've used so far — `simp`,
+`ring`, `omega` — was built using the same APIs you'll learn here.
+
+Don't be intimidated! You'll start with tiny tactics (5 lines) and
+gradually build up intuition. By the end, you'll understand how AI tools
+like LeanDojo interact with Lean under the hood.
+
 ## Why metaprogramming matters
 Metaprogramming is how you EXTEND Lean itself. This is critical for:
 
@@ -13,6 +21,14 @@ Metaprogramming is how you EXTEND Lean itself. This is critical for:
 2. **Proof automation**: Write tactics that automate repetitive proof patterns
 3. **Domain-specific tools**: Build specialized automation for your research area
 4. **LeanDojo/Pantograph**: These tools are built on Lean's metaprogramming APIs
+
+## Learning objectives
+After this file you will be able to:
+  1. Understand the `TacticM` monad and proof states
+  2. Write a simple custom tactic using `elab`
+  3. Read and inspect goals and hypotheses
+  4. Combine existing tactics into new ones
+  5. Understand how AI tools use the same APIs
 
 ## What you'll learn
 - The `TacticM` monad (the monad tactics run in)
@@ -27,6 +43,11 @@ open Lean Elab Tactic Meta
 -- ============================================================
 -- SECTION 1: Understanding the Tactic Monad
 -- ============================================================
+
+-- 💡 DON'T PANIC about the word "monad." For our purposes,
+-- `TacticM` just means "a computation that can read and modify
+-- the current proof state." Think of it as a context where you
+-- can ask "what's the current goal?" and "what hypotheses do I have?"
 
 /-!
 ## The mental model
@@ -50,6 +71,13 @@ The monad gives you access to:
 -- ============================================================
 -- SECTION 2: Your first custom tactic
 -- ============================================================
+
+-- Let's start small. The pattern for defining a new tactic is:
+--    elab "tactic_name" : tactic => do
+--      ... code in TacticM ...
+--
+-- The `elab` command says "when Lean sees `tactic_name` in a proof,
+-- run this code."  Let's make one that just SHOWS the current goal.
 
 -- A tactic that just logs the current goal to the info view
 elab "show_goal" : tactic => do
@@ -127,7 +155,12 @@ macro "omega_contra" : tactic =>
 /-!
 ## Lean's internal representation
 
-Everything in Lean is represented as `Expr`:
+💡 Think of `Expr` as Lean's "machine language for math."
+Every definition, theorem, type, and proof is stored as an `Expr`.
+When you write `2 + 3`, Lean converts it to something like
+`Expr.app (Expr.app (Expr.const `HAdd.hAdd ...) 2) 3`.
+
+The main constructors:
 - `Expr.const` — named constants like `Nat.add`
 - `Expr.app` — function application
 - `Expr.lam` — lambda abstraction
