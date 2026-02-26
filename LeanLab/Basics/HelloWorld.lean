@@ -89,7 +89,7 @@ theorem two_plus_two : 2 + 2 = 4 := by rfl
 theorem two_plus_two' : 2 + 2 = 4 := rfl
 
 -- A slightly more interesting one:
-theorem add_zero (n : Nat) : n + 0 = n := by rfl
+theorem add_zero_demo (n : Nat) : n + 0 = n := by rfl
 
 -- ============================================================
 -- SECTION 5: The `example` keyword

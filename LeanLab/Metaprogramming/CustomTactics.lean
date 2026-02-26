@@ -1,3 +1,7 @@
+import Lean
+import Lean.Elab.Tactic
+import Mathlib.Tactic
+
 /-!
 # Phase 3A — Custom Tactics and Metaprogramming
 
@@ -17,10 +21,6 @@ Metaprogramming is how you EXTEND Lean itself. This is critical for:
 - Macros and syntax extensions
 - How this connects to AI/Lean toolchains
 -/
-
-import Lean
-import Lean.Elab.Tactic
-import Mathlib.Tactic
 
 open Lean Elab Tactic Meta
 
@@ -87,12 +87,12 @@ elab "auto_close" : tactic => do
   catch _ => pure ()
   -- Try simp
   try
-    let (_, goals) ← simpGoal goal {} {} [] []
-    if goals.isEmpty then return
+    evalTactic (← `(tactic| simp))
+    return
   catch _ => pure ()
   -- Try omega
   try
-    Omega.omega (← getMainGoal) (← getMainGoal |>.getType)
+    evalTactic (← `(tactic| omega))
     return
   catch _ => pure ()
   throwError "auto_close: none of rfl, simp, omega worked"
@@ -118,7 +118,7 @@ example (n : Nat) : n ≤ n := by by_obvious
 
 -- A macro for "prove by contradiction using omega"
 macro "omega_contra" : tactic =>
-  `(tactic| by_contra h; push_neg at h; omega)
+  `(tactic| (by_contra h; push_neg at h; omega))
 
 -- ============================================================
 -- SECTION 5: Working with expressions (Expr)

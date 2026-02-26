@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # 05 — Quantifiers: For All and There Exists
 
@@ -39,7 +41,6 @@ theorem all_impl : ∀ n : Nat, n > 0 → n ≥ 1 := by
 
 theorem exists_even : ∃ n : Nat, n % 2 = 0 := by
   use 42               -- "I claim n = 42 works" (the witness)
-  rfl                  -- and indeed 42 % 2 = 0
 
 -- Another example: there exists a number greater than 100
 theorem exists_big : ∃ n : Nat, n > 100 := by
@@ -95,7 +96,7 @@ theorem calc_example (a b c : Nat) (h1 : a = b + 1) (h2 : b = c + 1) : a = c + 2
 -- Lean is constructive by default, but you can use classical logic:
 open Classical in
 theorem em_example (P : Prop) : P ∨ ¬P := by
-  exact em P           -- law of excluded middle
+  exact Classical.em P           -- law of excluded middle
 
 -- `by_contra` assumes ¬(goal) and asks you to derive False
 open Classical in

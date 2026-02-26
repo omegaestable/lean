@@ -1,3 +1,10 @@
+import Mathlib.Tactic
+import Mathlib.Data.Nat.Basic
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Int.Basic
+import Mathlib.Data.Real.Basic
+import Mathlib.Analysis.SpecificLimits.Basic
+
 /-!
 # Phase 4B — Autoformalization: Bridging Informal and Formal Math
 
@@ -14,13 +21,6 @@ and a key theme of the Harmonic Aristotle program.
 - Patterns for LLM-based autoformalization
 - Exercises: formalize real mathematical statements
 -/
-
-import Mathlib.Tactic
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.Int.Basic
-import Mathlib.Data.Real.Basic
-import Mathlib.Analysis.SpecificLimits.Basic
 
 -- ============================================================
 -- SECTION 1: Worked examples — Informal to Formal

@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # Phase 4A — AI-Assisted Theorem Proving: The Landscape
 
@@ -24,8 +26,6 @@ the field and connect your Lean skills to AI applications.
 - Benchmarks: miniF2F, ProofNet, FormL4, FormalMATH
 - Research directions aligned with the Aristotle grant
 -/
-
-import Mathlib.Tactic
 
 -- ============================================================
 -- SECTION 1: The Proof State — What AI "Sees"

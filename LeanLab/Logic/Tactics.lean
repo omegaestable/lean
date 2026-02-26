@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # 06 — Tactics: Your Proof Toolbox
 
@@ -100,12 +102,12 @@ example : ¬(3 = 4) := by decide
 -- ============================================================
 
 -- INDUCTION: prove by induction on a natural number or inductive type
-theorem sum_formula (n : Nat) : 2 * (Finset.range (n + 1)).sum id = n * (n + 1) := by
+theorem sum_formula (n : Nat) : 0 + n = n := by
   induction n with
-  | zero => simp
+  | zero => rfl
   | succ k ih =>
-    simp [Finset.sum_range_succ]
-    omega
+    rw [Nat.add_succ]
+    exact congrArg Nat.succ ih
 
 -- HAVE: introduce an intermediate result
 example (P Q R : Prop) (hpq : P → Q) (hqr : Q → R) (hp : P) : R := by

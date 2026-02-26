@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # 07 — Natural Numbers: Building Math from Scratch
 
@@ -9,8 +11,6 @@ Everything else (addition, multiplication, ordering) is built on top.
 This file shows you how to prove things about ℕ that you "know" are true,
 but now you'll understand WHY they're true at a foundational level.
 -/
-
-import Mathlib.Tactic
 
 -- ============================================================
 -- SECTION 1: Induction — the fundamental proof technique for ℕ
@@ -25,18 +25,18 @@ import Mathlib.Tactic
 -- recursion on the FIRST argument, so `0 + n` doesn't simplify directly
 -- in the same way `n + 0` does)
 
-theorem zero_add (n : Nat) : 0 + n = n := by
+theorem zero_add_demo (n : Nat) : 0 + n = n := by
   induction n with
   | zero => rfl                      -- 0 + 0 = 0 ✓
   | succ k ih =>                     -- assume 0 + k = k, prove 0 + (k+1) = k+1
-    simp [Nat.add_succ]              -- unfold definition
-    exact ih
+    rw [Nat.add_succ]                -- unfold definition
+    exact congrArg Nat.succ ih
 
 -- Addition is associative
 theorem add_assoc' (a b c : Nat) : (a + b) + c = a + (b + c) := by
   induction c with
   | zero => simp
-  | succ k ih => simp [Nat.add_succ, ih]
+  | succ k ih => omega
 
 -- ============================================================
 -- SECTION 2: Divisibility
@@ -46,7 +46,6 @@ theorem add_assoc' (a b c : Nat) : (a + b) + c = a + (b + c) := by
 
 example : 3 ∣ 12 := by
   use 4                -- witness: 12 = 3 * 4
-  ring
 
 example : ¬(3 ∣ 7) := by
   intro ⟨k, hk⟩
@@ -68,7 +67,7 @@ theorem dvd_trans' (a b c : Nat) (h1 : a ∣ b) (h2 : b ∣ c) : a ∣ c := by
   obtain ⟨l, hl⟩ := h2
   use k * l
   rw [hl, hk]
-  ring
+  ring_nf
 
 -- ============================================================
 -- SECTION 3: Modular arithmetic
@@ -84,7 +83,6 @@ def isEven (n : Nat) : Prop := 2 ∣ n
 theorem zero_is_even : isEven 0 := by
   unfold isEven
   use 0
-  ring
 
 theorem even_plus_two (n : Nat) (h : isEven n) : isEven (n + 2) := by
   unfold isEven at *

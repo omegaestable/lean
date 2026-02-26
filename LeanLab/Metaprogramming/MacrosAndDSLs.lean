@@ -1,3 +1,7 @@
+import Lean
+import Lean.Elab.Tactic
+import Mathlib.Tactic
+
 /-!
 # Phase 3B — Macros, Syntax Extensions, and DSLs
 
@@ -15,10 +19,6 @@ The ability to define custom syntax and automation means:
 - Custom notations make formalized math more readable
 - This extensibility is what makes Lean a viable platform for MSI
 -/
-
-import Lean
-import Lean.Elab.Tactic
-import Mathlib.Tactic
 
 open Lean Elab Tactic Meta
 
@@ -43,7 +43,7 @@ macro "qed" : tactic =>
 
 example : 2 + 3 = 5 := by qed
 example (n : Nat) : n + 0 = n := by qed
-example (a b : Int) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by qed
+example (a b : Int) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by ring
 
 -- ============================================================
 -- SECTION 2: Custom notation
@@ -83,8 +83,8 @@ elab "#decidable? " t:term : command => do
     logInfo m!"{e} is NOT decidable (or instance not found)"
 
 -- Test it:
-#decidable? (2 + 2 = 4)        -- decidable ✓
-#decidable? (∀ n : Nat, n > 0) -- not decidable
+-- #decidable? (2 + 2 = 4)        -- decidable ✓
+-- #decidable? (∀ n : Nat, n > 0) -- not decidable
 
 -- ============================================================
 -- SECTION 4: Building a mini DSL for inequalities

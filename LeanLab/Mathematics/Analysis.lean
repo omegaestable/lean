@@ -1,3 +1,9 @@
+import Mathlib.Tactic
+import Mathlib.Analysis.SpecificLimits.Basic
+import Mathlib.Topology.MetricSpace.Basic
+import Mathlib.Topology.Order.Basic
+import Mathlib.Analysis.Normed.Group.Basic
+
 /-!
 # 09 — Analysis: Limits, Continuity, and Beyond
 
@@ -10,12 +16,6 @@ Fair warning: analysis in Lean is harder than algebra because it involves
 natural with practice.
 -/
 
-import Mathlib.Tactic
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Topology.MetricSpace.Basic
-import Mathlib.Topology.Order.Basic
-import Mathlib.Analysis.Normed.Group.Basic
-
 -- ============================================================
 -- SECTION 1: Absolute value and basic inequalities
 -- ============================================================
@@ -23,7 +23,7 @@ import Mathlib.Analysis.Normed.Group.Basic
 -- Working with absolute values
 example (a : ℝ) : |a| ≥ 0 := abs_nonneg a
 
-example (a b : ℝ) : |a + b| ≤ |a| + |b| := abs_add a b
+example (a b : ℝ) : |a + b| ≤ |a| + |b| := abs_add_le a b
 
 -- Useful lemma patterns
 example (a : ℝ) (h : |a| < 1) : -1 < a := by linarith [abs_lt.mp h]
@@ -65,8 +65,7 @@ theorem zero_converges : SeqConvergesTo (fun _ => 0) 0 := by
 -- In Mathlib: `Continuous f` means f is continuous everywhere
 
 example : Continuous (fun x : ℝ => x + 1) := by
-  fun_ext  -- or continuity
-  sorry    -- these require more Mathlib setup
+  exact continuous_add_right 1
 
 -- Instead, let's work with what's easier:
 

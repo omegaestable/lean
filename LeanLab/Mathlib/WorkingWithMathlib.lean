@@ -1,3 +1,11 @@
+import Mathlib.Tactic
+import Mathlib.Algebra.Group.Basic
+import Mathlib.Algebra.Ring.Basic
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Int.GCD
+import Mathlib.Order.Basic
+import Mathlib.Data.Set.Basic
+
 /-!
 # Phase 2B — Working with Mathlib: Real Formalization Workflow
 
@@ -14,14 +22,6 @@ Mathlib proofs. Understanding Mathlib conventions is essential for:
 - Evaluating AI-generated proofs
 - Contributing formalizations that AI can learn from
 -/
-
-import Mathlib.Tactic
-import Mathlib.Algebra.Group.Basic
-import Mathlib.Algebra.Ring.Basic
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.Int.GCD
-import Mathlib.Order.Basic
-import Mathlib.Data.Set.Basic
 
 -- ============================================================
 -- SECTION 1: Mathlib's typeclass hierarchy
@@ -100,7 +100,8 @@ example (n : Nat) (h : n > 10) : n > 5 := by
 -- PATTERN 5: `gcongr` — generalized congruence for inequalities
 example (a b c d : ℤ) (h1 : a ≤ b) (h2 : c ≤ d)
     (ha : 0 ≤ a) (hc : 0 ≤ c) : a * c ≤ b * d := by
-  gcongr
+  have hb : 0 ≤ b := le_trans ha h1
+  exact mul_le_mul h1 h2 hc hb
 
 -- ============================================================
 -- SECTION 4: Contributing to Mathlib

@@ -1,3 +1,8 @@
+import Mathlib.Tactic
+import Mathlib.Data.Nat.Basic
+import Mathlib.Data.List.Basic
+import Mathlib.Algebra.Ring.Basic
+
 /-!
 # Phase 2A — Searching Mathlib: Finding What You Need
 
@@ -12,12 +17,6 @@ This is also exactly what AI models need to do (premise selection).
 - Loogle — type-based search engine for Mathlib
 - Moogle / LeanSearch — natural language search
 -/
-
-import Mathlib.Tactic
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.List.Basic
-import Mathlib.Algebra.Ring.Basic
-import Mathlib.Algebra.Order.Ring.Lemmas
 
 -- ============================================================
 -- SECTION 1: In-proof search tactics

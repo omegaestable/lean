@@ -23,7 +23,7 @@ Once you see this table, logic in Lean "clicks".
 -- "Given a proof of P, I produce a proof of Q."
 
 -- Term-mode proof: literally a function
-theorem imp_self (P : Prop) : P → P :=
+theorem imp_self_demo (P : Prop) : P → P :=
   fun hp => hp         -- Given a proof of P, return it
 
 -- Tactic-mode proof: step-by-step
@@ -59,7 +59,7 @@ theorem and_left (P Q : Prop) (h : P ∧ Q) : P := by
   obtain ⟨hp, _hq⟩ := h   -- destructure the pair
   exact hp
 
-theorem and_comm (P Q : Prop) : P ∧ Q → Q ∧ P := by
+theorem and_comm_demo (P Q : Prop) : P ∧ Q → Q ∧ P := by
   intro ⟨hp, hq⟩     -- destructure in the intro
   exact ⟨hq, hp⟩     -- rebuild swapped
 
@@ -78,7 +78,7 @@ theorem or_right (P Q : Prop) (hq : Q) : P ∨ Q := by
   exact hq
 
 -- Using a disjunction: case analysis
-theorem or_comm (P Q : Prop) : P ∨ Q → Q ∨ P := by
+theorem or_comm_demo (P Q : Prop) : P ∨ Q → Q ∨ P := by
   intro h
   cases h with         -- "consider both cases"
   | inl hp => right; exact hp   -- if we had P, put it on the right
@@ -93,7 +93,7 @@ theorem or_comm (P Q : Prop) : P ∨ Q → Q ∨ P := by
 
 -- #print Not  -- fun (a : Prop) => a → False
 
-theorem not_false : ¬False := by
+theorem not_false_demo : ¬False := by
   intro h              -- assume False
   exact h              -- False proves anything (we're done!)
 
@@ -110,7 +110,7 @@ theorem modus_tollens (P Q : Prop) : (P → Q) → ¬Q → ¬P := by
 
 -- P ↔ Q means (P → Q) ∧ (Q → P)
 
-theorem iff_self (P : Prop) : P ↔ P := by
+theorem iff_self_demo (P : Prop) : P ↔ P := by
   constructor          -- split into → and ←
   · intro hp; exact hp
   · intro hp; exact hp
@@ -124,7 +124,7 @@ theorem iff_self' (P : Prop) : P ↔ P :=
 -- ============================================================
 
 -- 1. Prove that ∧ is associative
-theorem and_assoc (P Q R : Prop) : (P ∧ Q) ∧ R ↔ P ∧ (Q ∧ R) := by
+theorem and_assoc_demo (P Q R : Prop) : (P ∧ Q) ∧ R ↔ P ∧ (Q ∧ R) := by
   sorry
 
 -- 2. Prove one of De Morgan's laws
@@ -132,5 +132,5 @@ theorem de_morgan (P Q : Prop) : ¬(P ∨ Q) → ¬P ∧ ¬Q := by
   sorry
 
 -- 3. Prove: if P → Q and P → R then P → Q ∧ R
-theorem imp_and (P Q R : Prop) : (P → Q) → (P → R) → P → Q ∧ R := by
+theorem imp_and_demo (P Q R : Prop) : (P → Q) → (P → R) → P → Q ∧ R := by
   sorry
