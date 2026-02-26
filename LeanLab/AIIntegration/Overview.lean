@@ -1,7 +1,7 @@
 import Mathlib.Tactic
 
 /-!
-# Phase 4A — AI-Assisted Theorem Proving: The Landscape
+# 14 — AI-Assisted Theorem Proving: The Landscape
 
 Everything you've learned so far — Lean syntax, logic, tactics,
 Mathlib, metaprogramming — feeds directly into this section.

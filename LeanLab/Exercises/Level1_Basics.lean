@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # Exercises — Level 1: Basics
 

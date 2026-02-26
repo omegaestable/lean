@@ -1,9 +1,8 @@
 import Lean
-import Lean.Elab.Tactic
 import Mathlib.Tactic
 
 /-!
-# Phase 3B — Macros, Syntax Extensions, and DSLs
+# 10 — Macros, Syntax Extensions, and DSLs
 
 In the previous file you wrote tactics by working directly with proof
 states (the `TacticM` monad). In this file you'll learn a *simpler*
@@ -111,7 +110,7 @@ elab "#decidable? " t:term : command => do
 
 -- Test it:
 -- #decidable? (2 + 2 = 4)        -- decidable ✓
--- #decidable? (∀ n : Nat, n > 0) -- not decidable
+-- #decidable? (∀ n : Nat, n > 0) -- not decidable (slow — uncomment to try)
 
 -- ============================================================
 -- SECTION 4: Building a mini DSL for inequalities

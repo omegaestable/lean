@@ -7,7 +7,7 @@ import Mathlib.Order.Basic
 import Mathlib.Data.Set.Basic
 
 /-!
-# Phase 2B — Working with Mathlib: Real Formalization Workflow
+# 08 — Working with Mathlib: Real Formalization Workflow
 
 The previous file taught you how to FIND lemmas. This file teaches you
 how to USE them fluently. You'll learn the proof patterns that experienced
@@ -71,8 +71,8 @@ example {R : Type*} [CommRing R] (a b : R) :
 example : (3 : ℤ) * (3 + 4) = 21 := by norm_num
 
 -- You can check what instances exist:
-#check (inferInstance : CommRing ℤ)
-#check (inferInstance : Field ℚ)
+-- #check (inferInstance : CommRing ℤ)
+-- #check (inferInstance : Field ℚ)
 
 -- ============================================================
 -- SECTION 2: Sets in Mathlib
@@ -193,8 +193,8 @@ We'll explore this more in the Metaprogramming section.
 -/
 
 -- You can inspect declarations:
-#print Nat.Prime          -- see the definition of "prime"
-#print Nat.add_comm       -- see the proof of commutativity
+-- #print Nat.Prime          -- see the definition of "prime"
+-- #print Nat.add_comm       -- see the proof of commutativity
 
 -- ============================================================
 -- TRY IT YOURSELF

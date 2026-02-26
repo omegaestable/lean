@@ -4,7 +4,7 @@ import Mathlib.Data.List.Basic
 import Mathlib.Algebra.Ring.Basic
 
 /-!
-# Phase 2A — Searching Mathlib: Finding What You Need
+# 07 — Searching Mathlib: Finding What You Need
 
 This might be the most *practically useful* file in the whole course.
 Mathlib is a vast library — and your ability to find the right lemma
@@ -49,24 +49,24 @@ After this file you will be able to:
 -- Place your cursor after `exact?` and look at the Infoview suggestions.
 
 example (n : Nat) : n + 0 = n := by
-  exact?   -- will suggest: `exact Nat.add_zero n` or `exact add_zero n`
+  exact Nat.add_zero n   -- found by: exact?
 
 example (a b : Nat) : a + b = b + a := by
-  exact?   -- will suggest: `exact Nat.add_comm a b`
+  exact Nat.add_comm a b   -- found by: exact?
 
 -- `apply?` — "What lemma can I apply here?"
 -- Useful when the goal needs an intermediate step.
 
 example (a b c : Nat) (h1 : a ≤ b) (h2 : b ≤ c) : a ≤ c := by
-  apply?   -- will suggest: `exact le_trans h1 h2`
+  exact le_trans h1 h2   -- found by: apply?
 
 -- `rw?` — "What can I rewrite with?"
 example (a b c : Nat) : a + b + c = a + (b + c) := by
-  rw?      -- will suggest: `rw [Nat.add_assoc]`
+  rw [Nat.add_assoc]   -- found by: rw?
 
 -- `simp?` — "What lemmas did simp use?" (shows reproducible call)
 example (xs : List Nat) : (xs ++ []).length = xs.length := by
-  simp?    -- shows: `simp only [List.append_nil]`
+  simp only [List.append_nil]   -- found by: simp?
 
 -- ============================================================
 -- SECTION 2: Mathlib naming conventions
@@ -109,14 +109,14 @@ If you want "a * (b + c) = a * b + a * c", try:
 -/
 
 -- Verify some naming conventions:
-#check Nat.add_comm       -- a + b = b + a
-#check Nat.add_assoc      -- (a + b) + c = a + (b + c)
-#check Nat.mul_comm       -- a * b = b * a
-#check mul_one             -- a * 1 = a
-#check one_mul             -- 1 * a = a
-#check add_zero            -- a + 0 = a
-#check zero_add            -- 0 + a = a
-#check mul_add             -- a * (b + c) = a * b + a * c
+-- #check Nat.add_comm       -- a + b = b + a
+-- #check Nat.add_assoc      -- (a + b) + c = a + (b + c)
+-- #check Nat.mul_comm       -- a * b = b * a
+-- #check mul_one             -- a * 1 = a
+-- #check one_mul             -- 1 * a = a
+-- #check add_zero            -- a + 0 = a
+-- #check zero_add            -- 0 + a = a
+-- #check mul_add             -- a * (b + c) = a * b + a * c
 
 -- ============================================================
 -- SECTION 3: External search tools

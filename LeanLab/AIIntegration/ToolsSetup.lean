@@ -1,5 +1,7 @@
+import Mathlib.Tactic
+
 /-!
-# Phase 4C — Setting Up AI/Lean Tools
+# 16 — Setting Up AI/Lean Tools
 
 This file is your practical setup guide. It's mostly documentation
 (not executable Lean code) because the AI tools live in the Python
@@ -245,5 +247,5 @@ python evaluate.py --benchmark miniF2F --model your-model --budget 600
 -- This file is primarily documentation. Here's a small executable section:
 
 -- You can verify that your Lean setup works with AI tools by checking:
-#check @Nat.add_comm  -- this should work if Mathlib is loaded
+-- #check @Nat.add_comm  -- this should work if Mathlib is loaded
 -- If this works, LeanDojo/Pantograph can interact with your project.

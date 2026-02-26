@@ -1,3 +1,7 @@
+import Mathlib.Tactic
+import Mathlib.Data.Real.Basic
+import Mathlib.Data.Nat.Prime.Basic
+
 /-!
 # Exercises — Level 4: Competition Mathematics
 
@@ -18,14 +22,6 @@ These exercises mimic the types of problems found in the miniF2F benchmark.
 They test both your formalization skills AND your proof skills.
 Completing these builds your portfolio for AI/Lean research.
 -/
-
-import Mathlib.Tactic
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Int.Basic
-import Mathlib.Data.Rat.Basic
-import Mathlib.Data.Real.Basic
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.Finset.Basic
 
 -- ============================================================
 -- AMC-STYLE (easier)

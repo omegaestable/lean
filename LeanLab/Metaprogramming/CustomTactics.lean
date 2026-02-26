@@ -1,9 +1,8 @@
 import Lean
-import Lean.Elab.Tactic
 import Mathlib.Tactic
 
 /-!
-# Phase 3A — Custom Tactics and Metaprogramming
+# 09 — Custom Tactics and Metaprogramming
 
 This is where Lean goes from being a proof assistant to being a
 *programmable proof assistant*. Everything you've used so far — `simp`,
@@ -85,9 +84,9 @@ elab "show_goal" : tactic => do
   let goalType ← goal.getType
   logInfo m!"Current goal: {goalType}"
 
--- Try it:
+-- Try it (uncomment show_goal to see the info message in the Infoview):
 example : 1 + 1 = 2 := by
-  show_goal    -- will display "Current goal: 1 + 1 = 2"
+  -- show_goal    -- will display "Current goal: 1 + 1 = 2"
   rfl
 
 -- A tactic that counts hypotheses
@@ -96,9 +95,10 @@ elab "count_hyps" : tactic => do
   let count := ctx.decls.toList.filterMap id |>.length
   logInfo m!"You have {count} hypotheses in context"
 
-example (h1 : True) (h2 : 1 = 1) : True := by
-  count_hyps   -- "You have 2 hypotheses in context"
-  exact h1
+-- Uncomment count_hyps to see the info message:
+example (_h1 : True) (_h2 : 1 = 1) : True := by
+  -- count_hyps   -- "You have 2 hypotheses in context"
+  exact _h1
 
 -- ============================================================
 -- SECTION 3: A more useful custom tactic
@@ -175,8 +175,8 @@ Understanding `Expr` is essential for:
 -/
 
 -- Inspect expressions with #check and metaprogramming
-#check @Expr.const
-#check @Expr.app
+-- #check @Expr.const
+-- #check @Expr.app
 
 -- A command that decomposes an expression and shows its structure
 elab "#inspect " t:term : command => do

@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # Exercises — Level 2: Logic and Proofs
 

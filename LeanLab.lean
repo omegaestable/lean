@@ -33,10 +33,14 @@ import LeanLab.Mathematics.NaturalNumbers
 import LeanLab.Mathematics.Algebra
 import LeanLab.Mathematics.Analysis
 
--- Phase 5: AI Integration (mostly documentation, minimal imports)
+-- Phase 5: AI Integration
 import LeanLab.AIIntegration.Overview
 import LeanLab.AIIntegration.Autoformalization
--- AIIntegration.ToolsSetup is documentation-only (no executable Lean)
+import LeanLab.AIIntegration.ToolsSetup
 
--- Playground
-import LeanLab.Sandbox
+-- Exercises (progressive difficulty)
+import LeanLab.Exercises.Level1_Basics
+import LeanLab.Exercises.Level2_Logic
+import LeanLab.Exercises.Level3_Math
+import LeanLab.Exercises.Level4_Competition
+import LeanLab.Exercises.Level5_Research

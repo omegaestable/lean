@@ -1,7 +1,6 @@
 # Lean 4 build artifacts
 /build/
 /lake-packages/
-/lake-manifest.json
 /.lake/
 
 # Editor files

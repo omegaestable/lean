@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-!
 # Exercises — Level 3: Mathematics
 
@@ -14,11 +16,6 @@ mathematical induction. When you're stuck:
 
 Use `exact?`, `apply?`, or `rw?` to find useful lemmas.
 -/
-
-import Mathlib.Tactic
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Int.Basic
-import Mathlib.Data.Rat.Basic
 
 -- ============================================================
 -- NATURAL NUMBER ARITHMETIC

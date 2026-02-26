@@ -43,23 +43,23 @@ After completing this file you will be able to:
 
 -- `#check` asks Lean: "What is the type of this expression?"
 -- 💡 TIP: Place your cursor on each #check line and look at the Infoview.
-#check 42              -- 42 : Nat
-#check "hello"         -- "hello" : String
-#check true            -- true : Bool
-#check (1, "hi")       -- (1, "hi") : Nat × String
+-- #check 42              -- 42 : Nat
+-- #check "hello"         -- "hello" : String
+-- #check true            -- true : Bool
+-- #check (1, "hi")       -- (1, "hi") : Nat × String
 
 -- `#eval` asks Lean: "Compute this expression and show me the result"
 -- Unlike #check (which shows the TYPE), #eval shows the VALUE.
-#eval 2 + 3            -- 5
-#eval "Hello" ++ " " ++ "World"   -- "Hello World"
-#eval (10 : Int) - 20  -- -10  (note: Nat subtraction truncates at 0!)
-#eval (10 : Nat) - 20  -- 0    (see? Nat can't go negative)
+-- #eval 2 + 3            -- 5
+-- #eval "Hello" ++ " " ++ "World"   -- "Hello World"
+-- #eval (10 : Int) - 20  -- -10  (note: Nat subtraction truncates at 0!)
+-- #eval (10 : Nat) - 20  -- 0    (see? Nat can't go negative)
 -- ⚠️  GOTCHA: Natural number subtraction never goes below zero!
 -- This is a common source of bugs. If you need negative results, use Int.
 
 -- `#print` shows the full definition of something
-#print Nat             -- an inductive type with zero and succ
-#print Nat.add         -- how addition is defined recursively
+-- #print Nat             -- an inductive type with zero and succ
+-- #print Nat.add         -- how addition is defined recursively
 
 -- ============================================================
 -- SECTION 2: Defining things
@@ -73,8 +73,8 @@ def myString : String := "Lean is cool"
 def inferredNumber := 42   -- Lean figures out it's a Nat
 
 -- You can evaluate your definitions
-#eval myNumber         -- 42
-#check myNumber        -- myNumber : Nat
+-- #eval myNumber         -- 42
+-- #check myNumber        -- myNumber : Nat
 
 -- ============================================================
 -- SECTION 3: Your first function
@@ -83,17 +83,17 @@ def inferredNumber := 42   -- Lean figures out it's a Nat
 -- Functions are defined with `def` too
 def double (n : Nat) : Nat := 2 * n
 
-#eval double 5         -- 10
-#eval double (double 3) -- 12
+-- #eval double 5         -- 10
+-- #eval double (double 3) -- 12
 
 -- Multiple arguments
 def add (a b : Nat) : Nat := a + b
 
-#eval add 3 4          -- 7
+-- #eval add 3 4          -- 7
 
 -- Anonymous functions (lambdas) — just like math notation
-#eval (fun x => x + 1) 5    -- 6
-#check (fun x => x + 1)     -- Nat → Nat  (Lean infers the type)
+-- #eval (fun x => x + 1) 5    -- 6
+-- #check (fun x => x + 1)     -- Nat → Nat  (Lean infers the type)
 
 -- ============================================================
 -- SECTION 4: Your first theorem

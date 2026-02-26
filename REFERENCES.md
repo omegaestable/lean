@@ -74,7 +74,7 @@ A curated, verified collection of resources for learning Lean 4 and AI-assisted 
 
 ### Benchmarks
 - [miniF2F](https://github.com/openai/miniF2F) — 488 competition problems (AMC/AIME/IMO)
-- ProofNet: [arXiv 2306.15626](https://arxiv.org/abs/2306.15626)
+- ProofNet: [arXiv 2302.12433](https://arxiv.org/abs/2302.12433)
 - FormL4 (Process-Driven Autoformalization): [arXiv 2406.01940](https://arxiv.org/abs/2406.01940)
 - FormalMATH: [arXiv 2505.02735](https://arxiv.org/abs/2505.02735)
 

@@ -34,20 +34,20 @@ mechanism, applied to mathematical statements instead of programs.
 -- ============================================================
 
 -- The types you'll use most often
-#check Nat           -- Natural numbers: 0, 1, 2, ...
-#check Int           -- Integers: ..., -2, -1, 0, 1, 2, ...
-#check Float         -- Floating point numbers
-#check Bool          -- true or false
-#check String        -- Text
-#check Char          -- A single character
+-- #check Nat           -- Natural numbers: 0, 1, 2, ...
+-- #check Int           -- Integers: ..., -2, -1, 0, 1, 2, ...
+-- #check Float         -- Floating point numbers
+-- #check Bool          -- true or false
+-- #check String        -- Text
+-- #check Char          -- A single character
 
 -- Product types (pairs, tuples)
-#check (1, 2)           -- Nat × Nat
-#check (1, "hi", true)  -- Nat × String × Bool
+-- #check (1, 2)           -- Nat × Nat
+-- #check (1, "hi", true)  -- Nat × String × Bool
 
 -- Function types
-#check Nat → Nat         -- A function from Nat to Nat
-#check Nat → Nat → Nat   -- A function taking two Nats, returning a Nat
+-- #check Nat → Nat         -- A function from Nat to Nat
+-- #check Nat → Nat → Nat   -- A function taking two Nats, returning a Nat
 -- Note: → is right-associative, so Nat → Nat → Nat = Nat → (Nat → Nat)
 -- This is "currying" — every function technically takes one argument
 
@@ -80,7 +80,7 @@ inductive Color where
   | blue
 deriving Repr  -- `deriving Repr` lets us use #eval to print values
 
-#eval Color.red
+-- #eval Color.red
 
 -- Pattern matching: THE way to work with inductive types
 def colorToString (c : Color) : String :=
@@ -89,7 +89,7 @@ def colorToString (c : Color) : String :=
   | Color.green => "Green"
   | Color.blue  => "Blue"
 
-#eval colorToString Color.blue  -- "Blue"
+-- #eval colorToString Color.blue  -- "Blue"
 
 -- ============================================================
 -- SECTION 3: Option and Sum types (you'll see these everywhere)
@@ -108,8 +108,8 @@ def colorToString (c : Color) : String :=
 def safeDivide (a b : Nat) : Option Nat :=
   if b == 0 then none else some (a / b)
 
-#eval safeDivide 10 3   -- some 3
-#eval safeDivide 10 0   -- none
+-- #eval safeDivide 10 3   -- some 3
+-- #eval safeDivide 10 0   -- none
 
 -- ============================================================
 -- SECTION 4: Structures (product types with named fields)
@@ -124,14 +124,14 @@ deriving Repr
 def origin : Point := { x := 0.0, y := 0.0 }
 def p : Point := { x := 3.0, y := 4.0 }
 
-#eval p.x          -- 3.0
-#eval p.y          -- 4.0
+-- #eval p.x          -- 3.0
+-- #eval p.y          -- 4.0
 
 -- A function on points
 def distance (p : Point) : Float :=
   Float.sqrt (p.x * p.x + p.y * p.y)
 
-#eval distance p   -- 5.0  (3-4-5 triangle!)
+-- #eval distance p   -- 5.0  (3-4-5 triangle!)
 
 -- ============================================================
 -- SECTION 5: Prop vs Type — the big distinction
@@ -157,44 +157,53 @@ def distance (p : Point) : Float :=
 --    `Prop` is like a checklist (each item is either done or not — you don't
 --    care which pen you used to check it off).
 
-#check (2 + 2 = 4)         -- Prop
-#check (∀ n : Nat, n + 0 = n)  -- Prop
-#check Nat                  -- Type
+-- #check (2 + 2 = 4)         -- Prop
+-- #check (∀ n : Nat, n + 0 = n)  -- Prop
+-- #check Nat                  -- Type
 
 -- `True` and `False` are propositions (not to be confused with `true`/`false` : Bool)
-#check True    -- Prop  (a proposition that is trivially provable)
-#check False   -- Prop  (a proposition with no proof — it's absurd)
-#check true    -- Bool  (a boolean value, for computation)
+-- #check True    -- Prop  (a proposition that is trivially provable)
+-- #check False   -- Prop  (a proposition with no proof — it's absurd)
+-- #check true    -- Bool  (a boolean value, for computation)
 
 -- ============================================================
 -- TRY IT YOURSELF
 -- ============================================================
 
 -- These exercises let you practice what you just learned.
--- Uncomment the code skeletons and fill in the `...` parts.
+-- Replace the `sorry` placeholders with real implementations.
 -- Use the patterns from the Color and Point examples above!
 
 -- 1. Define an inductive type `Weekday` with all 7 days
 --    (Model it after the `Color` type above)
--- inductive Weekday where
---   | monday
---   | tuesday
---   | ...
+inductive Weekday where
+  | monday
+  | tuesday
+  | wednesday
+  | thursday
+  | friday
+  | saturday
+  | sunday
+deriving Repr
 
 -- 2. Write a function `isWeekend : Weekday → Bool`
 --    (Use pattern matching like `colorToString` above)
--- def isWeekend : Weekday → Bool
---   | Weekday.saturday => true
---   | Weekday.sunday => true
---   | _ => false
+def isWeekend : Weekday → Bool
+  | Weekday.saturday => true
+  | Weekday.sunday => true
+  | _ => false
+
+-- Verify it works:
+-- #eval isWeekend Weekday.saturday  -- true
+-- #eval isWeekend Weekday.monday    -- false
 
 -- 3. Define a structure `Student` with fields `name : String` and `age : Nat`
 --    (Model it after the `Point` structure above)
--- structure Student where
---   name : String
---   age : Nat
--- deriving Repr
---
+structure Student where
+  name : String
+  age : Nat
+deriving Repr
+
 -- #eval ({ name := "Alice", age := 20 } : Student)
 
 -- 💡 TIP: If you're unsure about syntax, look at the examples above

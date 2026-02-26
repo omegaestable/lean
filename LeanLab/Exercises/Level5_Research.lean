@@ -1,3 +1,11 @@
+import Mathlib.Tactic
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Real.Basic
+import Mathlib.Analysis.SpecificLimits.Basic
+import Mathlib.Topology.MetricSpace.Basic
+import Mathlib.NumberTheory.Divisors
+import Mathlib.GroupTheory.OrderOfElement
+
 /-!
 # Exercises — Level 5: Research-Level Formalization
 
@@ -20,15 +28,6 @@ Each one involves formalizing a non-trivial mathematical result.
 Don't expect to finish all of these — they're aspirational goals.
 Completing even ONE of these projects demonstrates real competence.
 -/
-
-import Mathlib.Tactic
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.Real.Basic
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Topology.MetricSpace.Basic
-import Mathlib.NumberTheory.Divisors
-import Mathlib.Algebra.Group.Basic
-import Mathlib.GroupTheory.OrderOfElement
 
 -- ============================================================
 -- PROJECT 1: Formalize the Irrationality of √2

@@ -6,7 +6,7 @@ import Mathlib.Data.Real.Basic
 import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
-# Phase 4B — Autoformalization: Bridging Informal and Formal Math
+# 15 — Autoformalization: Bridging Informal and Formal Math
 
 Autoformalization is often called the "holy grail" of AI + formal math.
 If we could reliably translate any textbook theorem into Lean, we could
@@ -94,12 +94,13 @@ theorem sq_even_imp_even (n : ℤ) (h : ∃ k, n ^ 2 = 2 * k) : ∃ k, n = 2 * k
 -- This is formalized in Mathlib as `tendsto_one_div_atTop_nhds_zero_nat`
 -- But let's see what the manual version looks like:
 
--- Using our custom definition from Analysis.lean:
-def SeqConvergesTo' (a : ℕ → ℝ) (L : ℝ) : Prop :=
+-- Using the definition from Mathematics/Analysis.lean for reference:
+-- (We define a local variant here to keep this file self-contained.)
+def SeqConvergesTo_AF (a : ℕ → ℝ) (L : ℝ) : Prop :=
   ∀ ε > 0, ∃ N : ℕ, ∀ n : ℕ, n ≥ N → |a n - L| < ε
 
 -- The statement (proof is non-trivial, requires Archimedean property)
--- theorem one_over_n_converges : SeqConvergesTo' (fun n => 1 / (n + 1)) 0 := by
+-- theorem one_over_n_converges : SeqConvergesTo_AF (fun n => 1 / (n + 1)) 0 := by
 --   sorry
 
 -- ============================================================
@@ -209,6 +210,8 @@ theorem sq_ge_self (n : ℕ) (h : n ≥ 1) : n ^ 2 ≥ n := by
 -- 6. (Challenge) AMC-style problem:
 --    "Find the remainder when 2^100 is divided by 7"
 --    (Hint: use modular arithmetic and `decide` or `native_decide`)
+-- ⚠️ `native_decide` bypasses the kernel — it uses compiled code, not
+-- a verified proof. Fine for exploration, but not trusted in Mathlib.
 example : 2 ^ 100 % 7 = 2 := by native_decide
 
 -- ============================================================
