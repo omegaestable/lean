@@ -44,3 +44,4 @@ import LeanLab.Exercises.Level2_Logic
 import LeanLab.Exercises.Level3_Math
 import LeanLab.Exercises.Level4_Competition
 import LeanLab.Exercises.Level5_Research
+import LeanLab.Exercises.OpenGaussFiniteAlgebra
