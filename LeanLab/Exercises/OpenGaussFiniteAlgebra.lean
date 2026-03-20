@@ -9,7 +9,7 @@ The mixed products use the default left-associative parsing, so
 * `b ^ 2 * a * b` means `(b ^ 2) * a * b`
 * `b ^ 2 * a ^ 2` means `(b ^ 2) * (a ^ 2)`
 
-The proof is left open as a Gauss target.
+This remains an open target for Gauss-driven proof search.
 -/
 
 theorem exists_finite_ring_with_unit_witnesses :
